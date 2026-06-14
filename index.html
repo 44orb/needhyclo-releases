@@ -14,89 +14,125 @@
     --mono:Consolas,"SF Mono",ui-monospace,monospace;
   }
   *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
   html,body{margin:0}
-  body{background:var(--bg);color:var(--text);font-family:var(--sans);-webkit-font-smoothing:antialiased;line-height:1.5}
-  a{color:inherit}
-  .hazard{background-image:repeating-linear-gradient(-45deg,#EDE13B 0,#EDE13B 10px,#121212 10px,#121212 20px)}
-  .wrap{max-width:1080px;margin:0 auto;padding:0 24px}
+  body{background:var(--bg);color:var(--text);font-family:var(--sans);-webkit-font-smoothing:antialiased;line-height:1.5;overflow-x:hidden}
+  a{color:inherit;text-decoration:none}
+  .wrap{max-width:1080px;margin:0 auto;padding:0 24px;position:relative;z-index:2}
   .eyebrow{font-family:var(--mono);font-size:10px;letter-spacing:.4em;text-transform:uppercase;color:var(--accent)}
-  .label{font-family:var(--mono);font-size:10px;letter-spacing:.3em;text-transform:uppercase;color:var(--muted2)}
   h1,h2,h3{text-transform:uppercase;font-weight:800;letter-spacing:-.02em;margin:0}
   .quote::before{content:"\201C";color:var(--muted2)}
   .quote::after{content:"\201D";color:var(--muted2)}
 
-  /* top marquee + hazard */
-  .topbar{position:sticky;top:0;z-index:30;background:var(--bg);border-bottom:1px solid var(--border)}
-  .marquee{overflow:hidden;white-space:nowrap;padding:7px 0;font-family:var(--mono);font-size:10px;letter-spacing:.4em;text-transform:uppercase;color:var(--muted2)}
-  .marquee span{display:inline-block;animation:scroll 28s linear infinite}
-  @keyframes scroll{from{transform:translateX(0)}to{transform:translateX(-50%)}}
-  .haz-strip{height:6px}
+  /* ===== animated crossing hazard ribbons (background) ===== */
+  .ribbons{position:fixed;inset:0;z-index:0;overflow:hidden;pointer-events:none}
+  .ribbon{position:absolute;left:-30%;width:160%;height:84px;opacity:.06;
+    background:repeating-linear-gradient(-45deg,var(--accent) 0,var(--accent) 22px,#000 22px,#000 44px);
+    box-shadow:0 0 0 1px rgba(237,225,59,.08)}
+  .ribbon.r1{top:12%;transform:rotate(-19deg);animation:flow 26s linear infinite}
+  .ribbon.r2{top:46%;transform:rotate(13deg);animation:flowR 34s linear infinite}
+  .ribbon.r3{top:74%;transform:rotate(-9deg);animation:flow 40s linear infinite}
+  .ribbon.r4{top:92%;transform:rotate(16deg);animation:flowR 30s linear infinite;opacity:.045}
+  @keyframes flow{from{background-position:0 0}to{background-position:1240px 0}}
+  @keyframes flowR{from{background-position:0 0}to{background-position:-1240px 0}}
+  /* darken edges so text stays crisp over the ribbons */
+  .veil{position:fixed;inset:0;z-index:1;pointer-events:none;
+    background:radial-gradient(120% 80% at 50% 0%,rgba(18,18,18,.35) 0%,rgba(18,18,18,.82) 55%,#121212 100%)}
 
-  /* NHC monogram */
+  /* ===== top bar ===== */
+  .topbar{position:sticky;top:0;z-index:40;background:rgba(18,18,18,.86);backdrop-filter:blur(8px);border-bottom:1px solid var(--border)}
+  .marquee{overflow:hidden;white-space:nowrap;padding:7px 0;font-family:var(--mono);font-size:10px;letter-spacing:.4em;text-transform:uppercase;color:var(--muted2)}
+  .marquee span{display:inline-block;animation:scroll 30s linear infinite}
+  @keyframes scroll{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+  .haz-strip{height:6px;background:repeating-linear-gradient(-45deg,var(--accent) 0,var(--accent) 10px,#121212 10px,#121212 20px);animation:flow 6s linear infinite}
+
+  /* ===== NHC monogram ===== */
   .logo{position:relative;display:inline-flex;align-items:center;justify-content:center;border:2px solid var(--text);background:var(--bg);font-weight:800;letter-spacing:-.02em}
   .logo::after{content:"";position:absolute;left:0;right:0;bottom:0;height:10%;min-height:3px;background:var(--accent)}
 
-  /* nav */
-  .nav{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:18px 0}
+  /* ===== nav ===== */
+  .nav{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:16px 0}
   .nav .brand{display:flex;align-items:center;gap:12px}
-  .nav .brand .name{font-size:18px;font-weight:800;text-transform:uppercase;letter-spacing:-.01em}
+  .nav .brand .name{font-size:18px;font-weight:800;text-transform:uppercase}
   .nav .brand .name sup{font-size:9px;color:var(--muted);vertical-align:super}
   .nav .links{display:flex;gap:8px;flex-wrap:wrap}
 
-  /* buttons */
-  .btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;border:1px solid var(--border-light);
-       background:transparent;color:var(--text);padding:14px 22px;font-weight:800;text-transform:uppercase;
-       letter-spacing:.16em;font-size:13px;text-decoration:none;transition:.15s;cursor:pointer}
-  .btn:hover{border-color:var(--text)}
-  .btn-accent{border-color:var(--accent);background:var(--accent);color:#121212}
-  .btn-accent:hover{background:var(--accent-hover);border-color:var(--accent-hover)}
+  /* ===== buttons ===== */
+  .btn{display:inline-flex;align-items:center;justify-content:center;gap:11px;border:1px solid var(--border-light);
+       background:transparent;color:var(--text);padding:15px 24px;font-weight:800;text-transform:uppercase;
+       letter-spacing:.16em;font-size:13px;transition:.18s ease;cursor:pointer}
+  .btn:hover{border-color:var(--text);transform:translateY(-2px)}
+  .btn svg{width:18px;height:18px}
+  .btn-accent{border-color:var(--accent);background:var(--accent);color:#121212;box-shadow:0 0 0 0 rgba(237,225,59,.5)}
+  .btn-accent:hover{background:var(--accent-hover);border-color:var(--accent-hover);box-shadow:0 10px 34px -10px rgba(237,225,59,.55);transform:translateY(-2px)}
   .btn-sm{padding:9px 14px;font-size:11px;letter-spacing:.14em}
+  .btn-accent svg{animation:bob 2.4s ease-in-out infinite}
+  @keyframes bob{0%,100%{transform:translateY(0)}50%{transform:translateY(2px)}}
 
-  /* hero */
-  .hero{position:relative;padding:64px 0 56px;text-align:center;border-bottom:1px solid var(--border)}
-  .hero .logo{width:104px;height:104px;font-size:30px;margin:0 auto}
-  .hero h1{font-size:clamp(40px,8vw,82px);line-height:.92;margin-top:26px}
-  .hero h1 sup{font-size:.28em;color:var(--muted);vertical-align:super}
-  .hero .tag{margin-top:14px;font-family:var(--mono);font-size:11px;letter-spacing:.4em;text-transform:uppercase;color:var(--muted2)}
-  .hero .lede{max-width:620px;margin:26px auto 0;color:var(--muted);font-size:17px}
-  .cta{margin-top:34px;display:flex;gap:12px;justify-content:center;flex-wrap:wrap}
+  /* ===== hero ===== */
+  .hero{position:relative;padding:78px 0 64px;text-align:center;border-bottom:1px solid var(--border)}
+  .hero .logo{width:108px;height:108px;font-size:31px;margin:0 auto;box-shadow:0 20px 60px -20px rgba(237,225,59,.25)}
+  .hero h1{font-size:clamp(42px,8.5vw,90px);line-height:.9;margin-top:28px}
+  .hero h1 sup{font-size:.26em;color:var(--muted);vertical-align:super}
+  .hero .tag{margin-top:14px;font-family:var(--mono);font-size:11px;letter-spacing:.42em;text-transform:uppercase;color:var(--muted2)}
+  .hero .lede{max-width:640px;margin:26px auto 0;color:var(--muted);font-size:17px}
+  .cta{margin-top:36px;display:flex;gap:12px;justify-content:center;flex-wrap:wrap}
   .meta{margin-top:16px;font-family:var(--mono);font-size:11px;color:var(--muted2);letter-spacing:.1em}
   .reg{position:absolute;width:16px;height:16px;color:var(--muted2)}
 
-  /* sections */
-  section{padding:56px 0;border-bottom:1px solid var(--border)}
-  .sec-head{display:flex;align-items:baseline;gap:14px;margin-bottom:30px}
-  .sec-head h2{font-size:clamp(22px,4vw,34px)}
+  /* ===== sections ===== */
+  section{padding:64px 0;border-bottom:1px solid var(--border)}
+  .sec-head{display:flex;align-items:baseline;gap:14px;margin-bottom:32px}
+  .sec-head h2{font-size:clamp(22px,4vw,36px)}
   .sec-head .num{font-family:var(--mono);font-size:12px;color:var(--accent);letter-spacing:.2em}
 
-  /* feature grid */
+  /* ===== feature grid ===== */
   .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:14px}
-  .feat{border:1px solid var(--border);background:var(--surface);padding:20px}
+  .feat{position:relative;border:1px solid var(--border);background:rgba(24,24,24,.78);padding:22px 20px;transition:.2s ease;overflow:hidden}
+  .feat::before{content:"";position:absolute;left:0;top:0;width:0;height:2px;background:var(--accent);transition:width .25s ease}
+  .feat:hover{border-color:var(--border-light);transform:translateY(-4px);background:var(--surface)}
+  .feat:hover::before{width:100%}
   .feat .k{font-family:var(--mono);font-size:10px;letter-spacing:.2em;color:var(--accent);text-transform:uppercase}
-  .feat h3{font-size:15px;margin-top:8px;letter-spacing:0}
-  .feat p{margin:8px 0 0;color:var(--muted);font-size:14px}
+  .feat h3{font-size:15px;margin-top:9px;letter-spacing:0}
+  .feat p{margin:9px 0 0;color:var(--muted);font-size:14px}
 
-  /* steps */
+  /* ===== steps ===== */
   .steps{display:grid;gap:12px}
-  .step{display:flex;gap:16px;border:1px solid var(--border);background:var(--surface);padding:18px 20px}
+  .step{display:flex;gap:16px;border:1px solid var(--border);background:rgba(24,24,24,.78);padding:18px 20px;transition:.2s ease}
+  .step:hover{border-color:var(--border-light);transform:translateX(4px);background:var(--surface)}
   .step .n{flex:none;width:30px;height:30px;display:flex;align-items:center;justify-content:center;background:var(--accent);
            color:#121212;font-weight:800;font-family:var(--mono)}
   .step h3{font-size:14px;letter-spacing:0}
   .step p{margin:6px 0 0;color:var(--muted);font-size:14px}
+  .pill{display:inline-block;border:1px solid var(--border-light);padding:2px 8px;font-family:var(--mono);font-size:10px;letter-spacing:.15em;text-transform:uppercase;color:var(--muted)}
 
-  /* footer */
-  footer{padding:40px 0 60px;text-align:center}
+  /* ===== footer ===== */
+  footer{padding:44px 0 64px;text-align:center}
   footer .nm{font-family:var(--mono);font-size:11px;letter-spacing:.25em;text-transform:uppercase;color:var(--muted)}
   footer .sm{margin-top:10px;font-family:var(--mono);font-size:10px;color:var(--muted2);letter-spacing:.1em}
-  .pill{display:inline-block;border:1px solid var(--border-light);padding:2px 8px;font-family:var(--mono);font-size:10px;
-        letter-spacing:.15em;text-transform:uppercase;color:var(--muted)}
+
+  /* ===== scroll reveal ===== */
+  .reveal{opacity:0;transform:translateY(26px);transition:opacity .7s cubic-bezier(.2,.7,.2,1),transform .7s cubic-bezier(.2,.7,.2,1)}
+  .reveal.in{opacity:1;transform:none}
+  @media (prefers-reduced-motion:reduce){
+    .reveal{opacity:1;transform:none;transition:none}
+    .ribbon,.haz-strip,.marquee span,.btn-accent svg{animation:none}
+  }
 </style>
 </head>
 <body>
 
+<div class="ribbons">
+  <div class="ribbon r1"></div>
+  <div class="ribbon r2"></div>
+  <div class="ribbon r3"></div>
+  <div class="ribbon r4"></div>
+</div>
+<div class="veil"></div>
+
 <div class="topbar">
   <div class="marquee"><span>needhyclo® · c/o fashion buyer · serverless · offline · needhyclo® · c/o fashion buyer · serverless · offline · </span></div>
-  <div class="hazard haz-strip"></div>
+  <div class="haz-strip"></div>
 </div>
 
 <div class="wrap">
@@ -116,63 +152,82 @@
   <svg class="reg" style="left:20px;top:20px" viewBox="0 0 16 16" fill="none" stroke="currentColor"><path d="M8 0v16M0 8h16"/><circle cx="8" cy="8" r="3.5"/></svg>
   <svg class="reg" style="right:20px;top:20px" viewBox="0 0 16 16" fill="none" stroke="currentColor"><path d="M8 0v16M0 8h16"/><circle cx="8" cy="8" r="3.5"/></svg>
   <div class="wrap">
-    <span class="logo" style="width:104px;height:104px;font-size:30px">NHC</span>
-    <h1>Needhyclo<sup>®</sup></h1>
-    <div class="tag">c/o · fashion buyer</div>
-    <p class="lede">Рабочий стол байера брендовой одежды. Каталог проверенных магазинов, встроенный браузер, расчёт заказа «под ключ» с доставкой и таможней — всё в одном окне, полностью офлайн.</p>
-    <div class="cta">
-      <a class="btn btn-accent" href="https://github.com/44orb/needhyclo-releases/releases/latest/download/NEEDHYCLO-Setup.exe">↓ Скачать для Windows</a>
+    <span class="logo reveal" style="width:108px;height:108px;font-size:31px">NHC</span>
+    <h1 class="reveal">Needhyclo<sup>®</sup></h1>
+    <div class="tag reveal">c/o · fashion buyer</div>
+    <p class="lede reveal">Рабочий стол байера брендовой одежды. Каталог проверенных магазинов, встроенный браузер, расчёт заказа «под ключ» с доставкой и таможней — всё в одном окне, полностью офлайн.</p>
+    <div class="cta reveal">
+      <a class="btn btn-accent" href="https://github.com/44orb/needhyclo-releases/releases/latest/download/NEEDHYCLO-Setup.exe">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v11"/><path d="m8 11 4 4 4-4"/><path d="M4 17v2a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-2"/></svg>
+        Скачать для Windows
+      </a>
       <a class="btn" href="#how">Как пользоваться</a>
     </div>
-    <div class="meta">Windows 10/11 · 64-bit · автоматически качает последнюю версию</div>
+    <div class="meta reveal">Windows 10/11 · 64-bit · автоматически качает последнюю версию</div>
   </div>
 </header>
 
 <section id="about">
   <div class="wrap">
-    <div class="sec-head"><span class="num">01</span><h2 class="quote">Что это</h2></div>
-    <p style="max-width:720px;color:var(--muted);font-size:17px;margin:0 0 28px">
+    <div class="sec-head reveal"><span class="num">01</span><h2 class="quote">Что это</h2></div>
+    <p class="reveal" style="max-width:720px;color:var(--muted);font-size:17px;margin:0 0 30px">
       NEEDHYCLO — десктопное приложение для байеров: открываешь магазины во встроенном браузере, сохраняешь вещи в вишлист одним кликом
       и сразу считаешь полную стоимость заказа под ключ — товар, комиссия оплаты, многоэтапная доставка и таможня, в любой валюте по
       официальному курсу НБУ. Без сервера и без подписок: все данные хранятся локально на твоём компьютере.
     </p>
     <div class="grid">
-      <div class="feat"><div class="k">Каталог</div><h3>Проверенные магазины</h3><p>Аутлеты, флеш-сейлы, стоки и ритейлеры с фильтрами по категориям и странам. Открываются прямо в приложении.</p></div>
-      <div class="feat"><div class="k">Браузер</div><h3>Встроенные вкладки</h3><p>Полноценный браузер магазинов внутри окна — с переводом страниц на русский и логином в свои кабинеты.</p></div>
-      <div class="feat"><div class="k">Вишлист</div><h3>Сохраняй в один клик</h3><p>Плавающий тулбар на странице товара: «В вишлист», «Следить», «Чек прайс» — с фото и ценой выбранного размера.</p></div>
-      <div class="feat"><div class="k">Расчёт</div><h3>Стоимость под ключ</h3><p>Товар + комиссия + воронка доставки (Nova Poshta вживую, Meest, форвардеры) + таможня €150. Итог в любой валюте.</p></div>
-      <div class="feat"><div class="k">Курс НБУ</div><h3>Живой курс гривны</h3><p>Официальный курс НБУ обновляется на лету — конвертация цен в USD / EUR / PLN / UAH без ручного ввода.</p></div>
-      <div class="feat"><div class="k">Прокси</div><h3>Обход блокировок</h3><p>Вставь свой прокси (с логином/паролем) — сайты, недоступные в Украине, открываются внутри приложения.</p></div>
-      <div class="feat"><div class="k">Адблок</div><h3>Чистые страницы</h3><p>Встроенный блокировщик прячет навязчивую рекламу и баннеры куки одним тумблером.</p></div>
-      <div class="feat"><div class="k">Обновления</div><h3>Сами прилетают</h3><p>Новые версии приходят автоматически: появилось обновление — увидишь уведомление с кнопкой «Обновить».</p></div>
+      <div class="feat reveal"><div class="k">Каталог</div><h3>Проверенные магазины</h3><p>Аутлеты, флеш-сейлы, стоки и ритейлеры с фильтрами по категориям и странам. Открываются прямо в приложении.</p></div>
+      <div class="feat reveal"><div class="k">Браузер</div><h3>Встроенные вкладки</h3><p>Полноценный браузер магазинов внутри окна — с переводом страниц на русский и логином в свои кабинеты.</p></div>
+      <div class="feat reveal"><div class="k">Вишлист</div><h3>Сохраняй в один клик</h3><p>Плавающий тулбар на странице товара: «В вишлист», «Следить», «Чек прайс» — с фото и ценой выбранного размера.</p></div>
+      <div class="feat reveal"><div class="k">Расчёт</div><h3>Стоимость под ключ</h3><p>Товар + комиссия + воронка доставки (Nova Poshta вживую, Meest, форвардеры) + таможня €150. Итог в любой валюте.</p></div>
+      <div class="feat reveal"><div class="k">Курс НБУ</div><h3>Живой курс гривны</h3><p>Официальный курс НБУ обновляется на лету — конвертация цен в USD / EUR / PLN / UAH без ручного ввода.</p></div>
+      <div class="feat reveal"><div class="k">Прокси</div><h3>Обход блокировок</h3><p>Вставь свой прокси (с логином/паролем) — сайты, недоступные в Украине, открываются внутри приложения.</p></div>
+      <div class="feat reveal"><div class="k">Адблок</div><h3>Чистые страницы</h3><p>Встроенный блокировщик прячет навязчивую рекламу и баннеры куки одним тумблером.</p></div>
+      <div class="feat reveal"><div class="k">Обновления</div><h3>Сами прилетают</h3><p>Новые версии приходят автоматически: появилось обновление — увидишь уведомление с кнопкой «Обновить».</p></div>
     </div>
   </div>
 </section>
 
 <section id="how">
   <div class="wrap">
-    <div class="sec-head"><span class="num">02</span><h2 class="quote">Как пользоваться</h2></div>
+    <div class="sec-head reveal"><span class="num">02</span><h2 class="quote">Как пользоваться</h2></div>
     <div class="steps">
-      <div class="step"><div class="n">1</div><div><h3>Установи приложение</h3><p>Скачай <span class="pill">NEEDHYCLO-Setup.exe</span> и запусти — установщик в нашем стиле поставит программу и сам её откроет. Ярлык появится на рабочем столе.</p></div></div>
-      <div class="step"><div class="n">2</div><div><h3>Открой магазин из каталога</h3><p>На вкладке «Каталог» выбери магазин — он откроется во встроенном браузере. Кнопкой «Перевести на RU» можно перевести страницу.</p></div></div>
-      <div class="step"><div class="n">3</div><div><h3>Сохрани вещь</h3><p>На странице товара выбери размер и жми на плавающем тулбаре «В вишлист» или «Следить». «Чек прайс» покажет цену в USD/EUR/PLN/UAH по курсу НБУ.</p></div></div>
-      <div class="step"><div class="n">4</div><div><h3>Посчитай заказ под ключ</h3><p>Кнопка «Расчёт заказа» слева: впиши цену, добавь этапы доставки (Nova Poshta, Meest, форвардер) и получи полную стоимость с таможней в нужной валюте.</p></div></div>
-      <div class="step"><div class="n">5</div><div><h3>Прокси и адблок — если нужно</h3><p>Слева над курсом НБУ: вставь прокси, если сайт недоступен в Украине, и включи адблок, чтобы убрать рекламу и баннеры куки.</p></div></div>
-      <div class="step"><div class="n">6</div><div><h3>Обновляйся в один клик</h3><p>Когда выйдет новая версия, при запуске появится уведомление в углу — жми «Обновить». Если обновлений нет, программа просто открывается.</p></div></div>
+      <div class="step reveal"><div class="n">1</div><div><h3>Установи приложение</h3><p>Скачай <span class="pill">NEEDHYCLO-Setup.exe</span> и запусти — установщик в нашем стиле поставит программу и сам её откроет. Ярлык появится на рабочем столе.</p></div></div>
+      <div class="step reveal"><div class="n">2</div><div><h3>Открой магазин из каталога</h3><p>На вкладке «Каталог» выбери магазин — он откроется во встроенном браузере. Кнопкой «Перевести на RU» можно перевести страницу.</p></div></div>
+      <div class="step reveal"><div class="n">3</div><div><h3>Сохрани вещь</h3><p>На странице товара выбери размер и жми на плавающем тулбаре «В вишлист» или «Следить». «Чек прайс» покажет цену в USD/EUR/PLN/UAH по курсу НБУ.</p></div></div>
+      <div class="step reveal"><div class="n">4</div><div><h3>Посчитай заказ под ключ</h3><p>Кнопка «Расчёт заказа» слева: впиши цену, добавь этапы доставки (Nova Poshta, Meest, форвардер) и получи полную стоимость с таможней в нужной валюте.</p></div></div>
+      <div class="step reveal"><div class="n">5</div><div><h3>Прокси и адблок — если нужно</h3><p>Слева над курсом НБУ: вставь прокси, если сайт недоступен в Украине, и включи адблок, чтобы убрать рекламу и баннеры куки.</p></div></div>
+      <div class="step reveal"><div class="n">6</div><div><h3>Обновляйся в один клик</h3><p>Когда выйдет новая версия, при запуске появится уведомление в углу — жми «Обновить». Если обновлений нет, программа просто открывается.</p></div></div>
     </div>
-    <div class="cta" style="justify-content:flex-start;margin-top:34px">
-      <a class="btn btn-accent" href="https://github.com/44orb/needhyclo-releases/releases/latest/download/NEEDHYCLO-Setup.exe">↓ Скачать установщик</a>
+    <div class="cta reveal" style="justify-content:flex-start;margin-top:36px">
+      <a class="btn btn-accent" href="https://github.com/44orb/needhyclo-releases/releases/latest/download/NEEDHYCLO-Setup.exe">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v11"/><path d="m8 11 4 4 4-4"/><path d="M4 17v2a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-2"/></svg>
+        Скачать установщик
+      </a>
     </div>
   </div>
 </section>
 
 <footer>
   <div class="wrap">
-    <span class="logo" style="width:44px;height:44px;font-size:13px;margin-bottom:14px">NHC</span>
-    <div class="nm">“nomoney <span style="color:var(--accent)">=</span> nomama”</div>
-    <div class="sm">NEEDHYCLO® · c/o fashion buyer · serverless · Windows x64</div>
+    <span class="logo reveal" style="width:44px;height:44px;font-size:13px;margin-bottom:14px">NHC</span>
+    <div class="nm reveal">“nomoney <span style="color:var(--accent)">=</span> nomama”</div>
+    <div class="sm reveal">NEEDHYCLO® · c/o fashion buyer · serverless · Windows x64</div>
   </div>
 </footer>
 
+<script>
+  (function(){
+    var io = new IntersectionObserver(function(entries){
+      entries.forEach(function(e){ if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); } });
+    }, { threshold: 0.12, rootMargin: "0px 0px -8% 0px" });
+    document.querySelectorAll('.reveal').forEach(function(el, i){
+      // stagger items inside the same group for a cascade
+      var sib = Array.prototype.indexOf.call(el.parentNode.children, el);
+      el.style.transitionDelay = ((sib % 8) * 70) + 'ms';
+      io.observe(el);
+    });
+  })();
+</script>
 </body>
 </html>
