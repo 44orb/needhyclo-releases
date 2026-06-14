@@ -173,6 +173,43 @@
     color:var(--muted2);cursor:inherit;font-size:17px;line-height:1}
   .dl-note .x:hover{color:var(--text)}
   @media (max-width:480px){.dl-note{left:10px;right:10px;width:auto;top:12px}}
+
+  /* ===== gallery ===== */
+  .shots{display:grid;grid-template-columns:repeat(2,1fr);gap:14px}
+  .shot{position:relative;display:block;border:1px solid var(--border);background:#0e0e0e;overflow:hidden;transition:.25s ease}
+  .shot.wide{grid-column:1 / -1}
+  .shot img{display:block;width:100%;height:100%;object-fit:cover;object-position:top left;aspect-ratio:16/10;transition:transform .55s cubic-bezier(.2,.7,.2,1)}
+  .shot.wide img{aspect-ratio:24/10}
+  .shot:hover{border-color:var(--border-light);transform:translateY(-4px)}
+  .shot:hover img{transform:scale(1.045)}
+  .shot::before{content:"";position:absolute;left:0;top:0;height:3px;width:0;z-index:2;
+    background:repeating-linear-gradient(-45deg,var(--accent) 0 8px,#121212 8px 16px);transition:width .4s ease}
+  .shot:hover::before{width:100%}
+  .shot .cap{position:absolute;left:0;right:0;bottom:0;z-index:2;display:flex;align-items:center;gap:9px;
+    padding:30px 14px 12px;font-family:var(--mono);font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--text);
+    background:linear-gradient(to top,rgba(7,7,7,.94),rgba(7,7,7,.5) 55%,rgba(7,7,7,0))}
+  .shot .cap b{color:var(--accent);font-weight:inherit}
+  .shot .exp{position:absolute;top:10px;right:10px;z-index:2;width:30px;height:30px;display:flex;align-items:center;justify-content:center;
+    background:rgba(18,18,18,.55);border:1px solid var(--border-light);opacity:0;transition:.2s ease}
+  .shot:hover .exp{opacity:1}
+  .shot .exp svg{width:15px;height:15px;color:var(--accent)}
+
+  /* ===== lightbox ===== */
+  .lb{position:fixed;inset:0;z-index:200;display:flex;align-items:center;justify-content:center;
+    background:rgba(9,9,9,.8);backdrop-filter:blur(9px);-webkit-backdrop-filter:blur(9px);
+    opacity:0;pointer-events:none;transition:opacity .3s ease}
+  .lb.in{opacity:1;pointer-events:auto}
+  .lb figure{margin:0;position:relative;animation:lbpop .3s cubic-bezier(.2,.7,.2,1.2)}
+  @keyframes lbpop{from{transform:scale(.97);opacity:.4}to{transform:none;opacity:1}}
+  .lb img{display:block;max-width:92vw;max-height:80vh;border:1px solid var(--border-light);box-shadow:0 30px 90px -20px #000}
+  .lb figcaption{margin-top:13px;text-align:center;font-family:var(--mono);font-size:12px;letter-spacing:.22em;text-transform:uppercase;color:var(--muted)}
+  .lb figcaption b{color:var(--accent);font-weight:inherit}
+  .lb .lbx{position:absolute;top:-42px;right:0;width:34px;height:34px;border:1px solid var(--border-light);background:var(--surface);color:var(--text);font-size:17px;line-height:1}
+  .lb .nav{position:fixed;top:50%;transform:translateY(-50%);width:46px;height:64px;border:1px solid var(--border-light);
+    background:rgba(18,18,18,.72);color:var(--text);font-size:20px;display:flex;align-items:center;justify-content:center}
+  .lb .prev{left:18px}.lb .next{right:18px}
+  .lb .nav:hover,.lb .lbx:hover{border-color:var(--accent);color:var(--accent)}
+  @media (max-width:700px){.shots{grid-template-columns:1fr}.shot.wide{grid-column:auto}.shot img,.shot.wide img{aspect-ratio:16/10}.lb .nav{width:36px;height:52px}}
 </style>
 </head>
 <body>
@@ -213,6 +250,7 @@
     </div>
     <div class="links">
       <a class="btn btn-sm" href="#about">Описание</a>
+      <a class="btn btn-sm" href="#gallery">Галерея</a>
       <a class="btn btn-sm" href="#how">Инструкция</a>
     </div>
   </nav>
@@ -259,9 +297,22 @@
   </div>
 </section>
 
+<section id="gallery">
+  <div class="wrap">
+    <div class="sec-head reveal"><span class="num">02</span><h2 class="quote">Внутри софта</h2></div>
+    <div class="shots reveal">
+      <a class="shot wide" data-i="0"><img loading="lazy" src="shot-browser.webp" alt="Встроенный браузер магазина с тулбаром вишлиста и переводом на RU"/><span class="exp"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 3H5a2 2 0 0 0-2 2v3"/><path d="M21 8V5a2 2 0 0 0-2-2h-3"/><path d="M3 16v3a2 2 0 0 0 2 2h3"/><path d="M16 21h3a2 2 0 0 0 2-2v-3"/></svg></span><span class="cap"><b>05</b> Встроенный браузер · перевод на RU · тулбар вишлиста</span></a>
+      <a class="shot" data-i="1"><img loading="lazy" src="shot-catalog.webp" alt="Каталог проверенных магазинов"/><span class="exp"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 3H5a2 2 0 0 0-2 2v3"/><path d="M21 8V5a2 2 0 0 0-2-2h-3"/><path d="M3 16v3a2 2 0 0 0 2 2h3"/><path d="M16 21h3a2 2 0 0 0 2-2v-3"/></svg></span><span class="cap"><b>01</b> Каталог магазинов</span></a>
+      <a class="shot" data-i="2"><img loading="lazy" src="shot-calc.webp" alt="Расчёт заказа под ключ"/><span class="exp"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 3H5a2 2 0 0 0-2 2v3"/><path d="M21 8V5a2 2 0 0 0-2-2h-3"/><path d="M3 16v3a2 2 0 0 0 2 2h3"/><path d="M16 21h3a2 2 0 0 0 2-2v-3"/></svg></span><span class="cap"><b>02</b> Расчёт под ключ</span></a>
+      <a class="shot" data-i="3"><img loading="lazy" src="shot-wishlist.webp" alt="Вишлист с фото и ценами"/><span class="exp"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 3H5a2 2 0 0 0-2 2v3"/><path d="M21 8V5a2 2 0 0 0-2-2h-3"/><path d="M3 16v3a2 2 0 0 0 2 2h3"/><path d="M16 21h3a2 2 0 0 0 2-2v-3"/></svg></span><span class="cap"><b>03</b> Вишлист</span></a>
+      <a class="shot" data-i="4"><img loading="lazy" src="shot-settings.webp" alt="Настройки: локальное хранение, без сервера"/><span class="exp"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 3H5a2 2 0 0 0-2 2v3"/><path d="M21 8V5a2 2 0 0 0-2-2h-3"/><path d="M3 16v3a2 2 0 0 0 2 2h3"/><path d="M16 21h3a2 2 0 0 0 2-2v-3"/></svg></span><span class="cap"><b>04</b> Настройки · serverless</span></a>
+    </div>
+  </div>
+</section>
+
 <section id="how">
   <div class="wrap">
-    <div class="sec-head reveal"><span class="num">02</span><h2 class="quote">Как пользоваться</h2></div>
+    <div class="sec-head reveal"><span class="num">03</span><h2 class="quote">Как пользоваться</h2></div>
     <div class="steps">
       <div class="step reveal"><div class="n"><span class="nf">1</span><span class="nb">#</span></div><div><h3>Установи приложение</h3><p>Скачай <span class="pill">NEEDHYCLO-Setup.exe</span> и запусти <span class="dsh">┅</span> установщик в нашем стиле поставит программу и сам её откроет. Ярлык появится на рабочем столе.</p></div></div>
       <div class="step reveal"><div class="n"><span class="nf">2</span><span class="nb">#</span></div><div><h3>Открой магазин из каталога</h3><p>На вкладке «Каталог» выбери магазин <span class="dsh">┅</span> он откроется во встроенном браузере. Кнопкой «Перевести на RU» можно перевести страницу.</p></div></div>
@@ -344,6 +395,45 @@
   function hide(){ if(note){ note.classList.remove('in'); veil.classList.remove('in'); } }
   var links=document.querySelectorAll('a[href*="NEEDHYCLO-Setup.exe"]');
   for(var i=0;i<links.length;i++){ links[i].addEventListener('click', show); }
+})();
+</script>
+<script>
+/* gallery lightbox */
+(function(){
+  var SHOTS=[
+    {src:'shot-browser.webp',  cap:'<b>05</b> Встроенный браузер · перевод на RU · тулбар вишлиста'},
+    {src:'shot-catalog.webp',  cap:'<b>01</b> Каталог магазинов'},
+    {src:'shot-calc.webp',     cap:'<b>02</b> Расчёт заказа под ключ'},
+    {src:'shot-wishlist.webp', cap:'<b>03</b> Вишлист'},
+    {src:'shot-settings.webp', cap:'<b>04</b> Настройки · serverless'}
+  ];
+  var lb, img, cap, cur=0;
+  function build(){
+    lb=document.createElement('div'); lb.className='lb';
+    lb.innerHTML='<button class="nav prev" aria-label="Назад">&#8249;</button>'+
+      '<figure><button class="lbx" aria-label="Закрыть">&times;</button>'+
+      '<img alt=""/><figcaption></figcaption></figure>'+
+      '<button class="nav next" aria-label="Вперёд">&#8250;</button>';
+    document.body.appendChild(lb);
+    img=lb.querySelector('img'); cap=lb.querySelector('figcaption');
+    lb.querySelector('.lbx').addEventListener('click', close);
+    lb.querySelector('.prev').addEventListener('click', function(e){e.stopPropagation();go(-1);});
+    lb.querySelector('.next').addEventListener('click', function(e){e.stopPropagation();go(1);});
+    lb.addEventListener('click', function(e){ if(e.target===lb) close(); });
+  }
+  function render(){ var s=SHOTS[cur]; img.src=s.src; cap.innerHTML=s.cap; }
+  function open(i){ if(!lb) build(); cur=i; render(); requestAnimationFrame(function(){ lb.classList.add('in'); }); }
+  function close(){ if(lb) lb.classList.remove('in'); }
+  function go(d){ cur=(cur+d+SHOTS.length)%SHOTS.length; render(); }
+  document.querySelectorAll('.shot').forEach(function(a){
+    a.addEventListener('click', function(e){ e.preventDefault(); open(+a.getAttribute('data-i')); });
+  });
+  document.addEventListener('keydown', function(e){
+    if(!lb || !lb.classList.contains('in')) return;
+    if(e.key==='Escape') close();
+    else if(e.key==='ArrowLeft') go(-1);
+    else if(e.key==='ArrowRight') go(1);
+  });
 })();
 </script>
 </body>
