@@ -43,6 +43,10 @@
   .quote::after{content:"\201D";color:var(--muted2)}
   .dsh{font-family:var(--mono);color:var(--muted2);letter-spacing:.04em}
 
+  /* ===== custom crosshair (registration-mark) cursor site-wide ===== */
+  html{cursor:url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%2232%22%20height%3D%2232%22%20viewBox%3D%220%200%2032%2032%22%3E%3Cg%20fill%3D%22none%22%20stroke%3D%22%23121212%22%20stroke-width%3D%223.4%22%20stroke-linecap%3D%22round%22%3E%3Cpath%20d%3D%22M16%202.5v8.5M16%2021v8.5M2.5%2016h8.5M21%2016h8.5%22%2F%3E%3Ccircle%20cx%3D%2216%22%20cy%3D%2216%22%20r%3D%226.6%22%2F%3E%3C%2Fg%3E%3Cg%20fill%3D%22none%22%20stroke%3D%22%23ECEAE3%22%20stroke-width%3D%221.6%22%20stroke-linecap%3D%22round%22%3E%3Cpath%20d%3D%22M16%202.5v8.5M16%2021v8.5M2.5%2016h8.5M21%2016h8.5%22%2F%3E%3Ccircle%20cx%3D%2216%22%20cy%3D%2216%22%20r%3D%226.6%22%2F%3E%3C%2Fg%3E%3Ccircle%20cx%3D%2216%22%20cy%3D%2216%22%20r%3D%221.1%22%20fill%3D%22%23EDE13B%22%2F%3E%3C%2Fsvg%3E") 16 16,crosshair}
+  *{cursor:inherit}
+
   /* ===== animated crossing hazard ribbons (background) ===== */
   .ribbons{position:fixed;inset:0;z-index:0;overflow:hidden;pointer-events:none}
   /* opaque so crossings stay clean (one tape over another, no muddy blend) */
