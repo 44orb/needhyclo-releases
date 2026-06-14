@@ -41,8 +41,9 @@
 
   /* ===== top bar ===== */
   .topbar{position:sticky;top:0;z-index:40;background:rgba(18,18,18,.86);backdrop-filter:blur(8px);border-bottom:1px solid var(--border)}
-  .marquee{overflow:hidden;white-space:nowrap;padding:7px 0;font-family:var(--mono);font-size:10px;letter-spacing:.4em;text-transform:uppercase;color:var(--muted2)}
-  .marquee span{display:inline-block;animation:scroll 30s linear infinite}
+  .marquee{overflow:hidden;padding:7px 0;font-family:var(--mono);font-size:10px;letter-spacing:.4em;text-transform:uppercase;color:var(--muted2)}
+  .mq-track{display:inline-flex;white-space:nowrap;will-change:transform;animation:scroll 70s linear infinite}
+  .mq-track b{font-weight:inherit}
   @keyframes scroll{from{transform:translateX(0)}to{transform:translateX(-50%)}}
   .haz-strip{height:6px;background:repeating-linear-gradient(-45deg,var(--accent) 0,var(--accent) 10px,#121212 10px,#121212 20px);animation:flow 6s linear infinite}
 
@@ -131,7 +132,7 @@
 <div class="veil"></div>
 
 <div class="topbar">
-  <div class="marquee"><span>needhyclo® · c/o fashion buyer · serverless · offline · needhyclo® · c/o fashion buyer · serverless · offline · </span></div>
+  <div class="marquee"><div class="mq-track"><span>needhyclo® · c/o fashion buyer · serverless · offline · needhyclo® · c/o fashion buyer · serverless · offline · needhyclo® · c/o fashion buyer · serverless · offline · needhyclo® · c/o fashion buyer · serverless · offline · needhyclo® · c/o fashion buyer · serverless · offline · needhyclo® · c/o fashion buyer · serverless · offline · needhyclo® · c/o fashion buyer · serverless · offline · needhyclo® · c/o fashion buyer · serverless · offline · needhyclo® · c/o fashion buyer · serverless · offline · needhyclo® · c/o fashion buyer · serverless · offline · </span><span>needhyclo® · c/o fashion buyer · serverless · offline · needhyclo® · c/o fashion buyer · serverless · offline · needhyclo® · c/o fashion buyer · serverless · offline · needhyclo® · c/o fashion buyer · serverless · offline · needhyclo® · c/o fashion buyer · serverless · offline · needhyclo® · c/o fashion buyer · serverless · offline · needhyclo® · c/o fashion buyer · serverless · offline · needhyclo® · c/o fashion buyer · serverless · offline · needhyclo® · c/o fashion buyer · serverless · offline · needhyclo® · c/o fashion buyer · serverless · offline · </span></div></div>
   <div class="haz-strip"></div>
 </div>
 
