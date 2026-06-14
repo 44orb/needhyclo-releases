@@ -150,14 +150,15 @@
   .reveal.in{opacity:1;transform:none}
   @media (prefers-reduced-motion:reduce){
     .reveal{opacity:1;transform:none;transition:none}
-    .ribbon,.haz-strip,.marquee span,.btn-accent svg,.dl-arrow.in{animation:none}
+    .ribbon,.haz-strip,.marquee span,.btn-accent svg{animation:none}
   }
 
-  /* ===== download notice → points at the browser's download button ===== */
-  .dl-arrow{position:fixed;top:8px;z-index:130;pointer-events:none;opacity:0;transition:opacity .4s ease}
-  .dl-arrow.in{opacity:1;animation:dlBob 1.15s ease-in-out infinite}
-  @keyframes dlBob{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
-  .dl-note{position:fixed;top:56px;right:14px;z-index:129;width:300px;background:var(--surface);
+  /* ===== download notice (top-right) + background blur to focus attention ===== */
+  .dl-veil{position:fixed;inset:0;z-index:120;opacity:0;pointer-events:none;
+    background:rgba(18,18,18,.34);backdrop-filter:blur(4px);-webkit-backdrop-filter:blur(4px);
+    transition:opacity .4s ease}
+  .dl-veil.in{opacity:1;pointer-events:auto}
+  .dl-note{position:fixed;top:16px;right:14px;z-index:129;width:300px;background:var(--surface);
     border:1px solid var(--border-light);box-shadow:0 20px 54px -16px rgba(0,0,0,.75);
     opacity:0;transform:translateY(-12px) scale(.98);transition:opacity .35s ease,transform .35s ease;pointer-events:none}
   .dl-note.in{opacity:1;transform:none;pointer-events:auto}
@@ -167,10 +168,11 @@
   .dl-note h4{margin:7px 0 0;font-size:14px}
   .dl-note .file{margin-top:4px;font-family:var(--mono);font-size:11px;color:var(--muted2);letter-spacing:.04em}
   .dl-note p{margin:10px 0 0;font-size:12.5px;color:var(--muted);line-height:1.55}
+  .dl-note .di{display:inline-block;width:13px;height:13px;vertical-align:-2px;color:var(--text)}
   .dl-note .x{position:absolute;top:7px;right:8px;width:24px;height:24px;border:0;background:none;
     color:var(--muted2);cursor:inherit;font-size:17px;line-height:1}
   .dl-note .x:hover{color:var(--text)}
-  @media (max-width:480px){.dl-note{left:10px;right:10px;width:auto;top:12px}.dl-arrow{display:none}}
+  @media (max-width:480px){.dl-note{left:10px;right:10px;width:auto;top:12px}}
 </style>
 </head>
 <body>
@@ -304,41 +306,42 @@
   var ua=navigator.userAgent;
   var mobile=/Mobi|Android|iPhone|iPad|iPod/i.test(ua);
   function detect(){
-    if(/Edg\//.test(ua))        return {n:'Microsoft Edge', r:152};
-    if(/OPR\//.test(ua)||/\bOpera\b/.test(ua)) return {n:'Opera', r:150};
-    if(/YaBrowser/.test(ua))    return {n:'Яндекс.Браузере', r:150};
-    if(/Firefox\//.test(ua))    return {n:'Firefox', r:120};
-    if(/Chrome\//.test(ua))     return {n:'Google Chrome', r:152};
-    if(/Safari\//.test(ua))     return {n:'Safari', r:82};
-    return {n:'браузере', r:140};
+    if(/Edg\//.test(ua))        return 'Microsoft Edge';
+    if(/OPR\//.test(ua)||/\bOpera\b/.test(ua)) return 'Opera';
+    if(/YaBrowser/.test(ua))    return 'Яндекс.Браузере';
+    if(/Firefox\//.test(ua))    return 'Firefox';
+    if(/Chrome\//.test(ua))     return 'Google Chrome';
+    if(/Safari\//.test(ua))     return 'Safari';
+    return 'браузере';
   }
-  var b=detect(), note, arrow, timer;
+  /* download glyph that mimics the browser toolbar icon (arrow into tray) */
+  var ICON='<svg class="di" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" '+
+    'stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">'+
+    '<path d="M12 3v11"/><path d="m8 11 4 4 4-4"/><path d="M4 17v2a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-2"/></svg>';
+  var bn=detect(), note, veil, timer;
   function build(){
-    arrow=document.createElement('div');
-    arrow.className='dl-arrow';
-    arrow.style.right=b.r+'px';
-    arrow.innerHTML='<svg width="26" height="50" viewBox="0 0 26 50" fill="none" stroke="#EDE13B" '+
-      'stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round">'+
-      '<path d="M6 11 L13 4 L20 11"/><line x1="13" y1="11" x2="13" y2="48" stroke-dasharray="1 6.5"/></svg>';
+    veil=document.createElement('div');
+    veil.className='dl-veil';
+    veil.addEventListener('click', hide);
     var msg = mobile
-      ? 'Файл качается. Найди его в загрузках или шторке уведомлений <b style="color:var(--accent)">'+b.n+'</b> и запусти.'
-      : 'Файл качается. Открой его из загрузок <b style="color:var(--accent)">'+b.n+'</b> — иконка <b style="color:var(--text)">↓</b> вверху справа, затем запусти установщик.';
+      ? 'Файл качается. Найди его в загрузках или шторке уведомлений <b style="color:var(--accent)">'+bn+'</b> и запусти.'
+      : 'Файл качается. Открой его из загрузок <b style="color:var(--accent)">'+bn+'</b> — иконка '+ICON+' вверху справа, затем запусти установщик.';
     note=document.createElement('div');
     note.className='dl-note';
     note.innerHTML='<div class="haz"></div><button class="x" aria-label="Закрыть">&times;</button>'+
       '<div class="body"><div class="k">▸ Установка</div><h4>Загрузка началась</h4>'+
       '<div class="file">NEEDHYCLO-Setup.exe</div><p>'+msg+'</p></div>';
-    document.body.appendChild(arrow);
+    document.body.appendChild(veil);
     document.body.appendChild(note);
     note.querySelector('.x').addEventListener('click', hide);
   }
   function show(){
     if(!note) build();
-    requestAnimationFrame(function(){ note.classList.add('in'); if(!mobile) arrow.classList.add('in'); });
+    requestAnimationFrame(function(){ veil.classList.add('in'); note.classList.add('in'); });
     clearTimeout(timer);
     timer=setTimeout(hide, 15000);
   }
-  function hide(){ if(note){ note.classList.remove('in'); if(arrow) arrow.classList.remove('in'); } }
+  function hide(){ if(note){ note.classList.remove('in'); veil.classList.remove('in'); } }
   var links=document.querySelectorAll('a[href*="NEEDHYCLO-Setup.exe"]');
   for(var i=0;i<links.length;i++){ links[i].addEventListener('click', show); }
 })();
