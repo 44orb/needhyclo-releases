@@ -26,13 +26,13 @@
 
   /* ===== animated crossing hazard ribbons (background) ===== */
   .ribbons{position:fixed;inset:0;z-index:0;overflow:hidden;pointer-events:none}
-  .ribbon{position:absolute;left:-30%;width:160%;height:84px;opacity:.06;
-    background:repeating-linear-gradient(-45deg,var(--accent) 0,var(--accent) 22px,#000 22px,#000 44px);
-    box-shadow:0 0 0 1px rgba(237,225,59,.08)}
+  /* opaque so crossings stay clean (one tape over another, no muddy blend) */
+  .ribbon{position:absolute;left:-30%;width:160%;height:84px;
+    background:repeating-linear-gradient(-45deg,#201e15 0,#201e15 22px,#131313 22px,#131313 44px)}
   .ribbon.r1{top:12%;transform:rotate(-19deg);animation:flow 26s linear infinite}
   .ribbon.r2{top:46%;transform:rotate(13deg);animation:flowR 34s linear infinite}
   .ribbon.r3{top:74%;transform:rotate(-9deg);animation:flow 40s linear infinite}
-  .ribbon.r4{top:92%;transform:rotate(16deg);animation:flowR 30s linear infinite;opacity:.045}
+  .ribbon.r4{top:92%;transform:rotate(16deg);animation:flowR 30s linear infinite}
   @keyframes flow{from{background-position:0 0}to{background-position:1240px 0}}
   @keyframes flowR{from{background-position:0 0}to{background-position:-1240px 0}}
   /* darken edges so text stays crisp over the ribbons */
