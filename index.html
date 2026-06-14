@@ -145,6 +145,21 @@
 </style>
 </head>
 <body>
+<script>
+/* Deter casual inspection: block right-click + view-source / devtools / save shortcuts.
+   Client-side only — not real protection (the public repo holds this HTML anyway). */
+(function(){
+  var stop=function(e){e.preventDefault();e.stopPropagation();return false;};
+  document.addEventListener('contextmenu',stop,true);
+  document.addEventListener('dragstart',stop,true);
+  document.addEventListener('keydown',function(e){
+    var k=(e.key||'').toLowerCase(), mod=e.ctrlKey||e.metaKey;
+    if(k==='f12') return stop(e);                                   /* devtools */
+    if(mod&&e.shiftKey&&(k==='i'||k==='j'||k==='c'||k==='k')) return stop(e); /* inspect/console */
+    if(mod&&(k==='u'||k==='s')) return stop(e);                     /* view-source / save */
+  },true);
+})();
+</script>
 
 <div class="ribbons">
   <div class="ribbon r1"></div>
