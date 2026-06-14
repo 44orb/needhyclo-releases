@@ -113,19 +113,29 @@
   /* ===== feature grid ===== */
   .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:14px}
   .feat{position:relative;border:1px solid var(--border);background:rgba(24,24,24,.78);padding:22px 20px;transition:.2s ease;overflow:hidden}
-  .feat::before{content:"";position:absolute;left:0;top:0;width:0;height:2px;background:var(--accent);transition:width .25s ease}
+  /* accent line draws around the whole perimeter on hover (top→right→bottom→left) */
+  .feat::before,.feat::after{content:"";position:absolute;width:0;height:0;box-sizing:border-box;pointer-events:none;z-index:1}
+  .feat::before{top:0;left:0;border-top:2px solid var(--accent);border-right:2px solid var(--accent);
+    transition:width .2s linear,height .2s linear .2s}
+  .feat::after{right:0;bottom:0;border-bottom:2px solid var(--accent);border-left:2px solid var(--accent);
+    transition:width .2s linear .4s,height .2s linear .6s}
   .feat:hover{border-color:var(--border-light);transform:translateY(-4px);background:var(--surface)}
-  .feat:hover::before{width:100%}
+  .feat:hover::before,.feat:hover::after{width:100%;height:100%}
   .feat .k{font-family:var(--mono);font-size:10px;letter-spacing:.2em;color:var(--accent);text-transform:uppercase}
   .feat h3{font-size:15px;margin-top:9px;letter-spacing:0}
   .feat p{margin:9px 0 0;color:var(--muted);font-size:14px}
 
   /* ===== steps ===== */
   .steps{display:grid;gap:12px}
-  .step{display:flex;gap:16px;border:1px solid var(--border);background:rgba(24,24,24,.78);padding:18px 20px;transition:.2s ease}
+  .step{display:flex;gap:16px;border:1px solid var(--border);background:rgba(24,24,24,.78);padding:18px 20px;transition:.2s ease;perspective:600px}
   .step:hover{border-color:var(--border-light);transform:translateX(4px);background:var(--surface)}
-  .step .n{flex:none;width:30px;height:30px;display:flex;align-items:center;justify-content:center;background:var(--accent);
-           color:#121212;font-weight:800;font-family:var(--mono)}
+  /* the number cube flips over on hover, revealing a # on the same yellow face */
+  .step .n{position:relative;flex:none;width:30px;height:30px;transform-style:preserve-3d;
+           transition:transform .6s cubic-bezier(.5,-0.35,.3,1.5)}
+  .step:hover .n{transform:rotateX(-180deg)}
+  .step .n .nf,.step .n .nb{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;
+    background:var(--accent);color:#121212;font-weight:800;font-family:var(--mono);backface-visibility:hidden}
+  .step .n .nb{transform:rotateX(180deg);font-size:18px;font-weight:900}
   .step h3{font-size:14px;letter-spacing:0}
   .step p{margin:6px 0 0;color:var(--muted);font-size:14px}
   .pill{display:inline-block;border:1px solid var(--border-light);padding:2px 8px;font-family:var(--mono);font-size:10px;letter-spacing:.15em;text-transform:uppercase;color:var(--muted)}
@@ -251,12 +261,12 @@
   <div class="wrap">
     <div class="sec-head reveal"><span class="num">02</span><h2 class="quote">Как пользоваться</h2></div>
     <div class="steps">
-      <div class="step reveal"><div class="n">1</div><div><h3>Установи приложение</h3><p>Скачай <span class="pill">NEEDHYCLO-Setup.exe</span> и запусти <span class="dsh">┅</span> установщик в нашем стиле поставит программу и сам её откроет. Ярлык появится на рабочем столе.</p></div></div>
-      <div class="step reveal"><div class="n">2</div><div><h3>Открой магазин из каталога</h3><p>На вкладке «Каталог» выбери магазин <span class="dsh">┅</span> он откроется во встроенном браузере. Кнопкой «Перевести на RU» можно перевести страницу.</p></div></div>
-      <div class="step reveal"><div class="n">3</div><div><h3>Сохрани вещь</h3><p>На странице товара выбери размер и жми на плавающем тулбаре «В вишлист» или «Следить». «Чек прайс» покажет цену в USD/EUR/PLN/UAH по курсу НБУ.</p></div></div>
-      <div class="step reveal"><div class="n">4</div><div><h3>Посчитай заказ под ключ</h3><p>Кнопка «Расчёт заказа» слева: впиши цену, добавь этапы доставки (Nova Poshta, Meest, форвардер) и получи полную стоимость с таможней в нужной валюте.</p></div></div>
-      <div class="step reveal"><div class="n">5</div><div><h3>Прокси и адблок <span class="dsh">┅</span> если нужно</h3><p>Слева над курсом НБУ: вставь прокси, если сайт недоступен в Украине, и включи адблок, чтобы убрать рекламу и баннеры куки.</p></div></div>
-      <div class="step reveal"><div class="n">6</div><div><h3>Обновляйся в один клик</h3><p>Когда выйдет новая версия, при запуске появится уведомление в углу <span class="dsh">┅</span> жми «Обновить». Если обновлений нет, программа просто открывается.</p></div></div>
+      <div class="step reveal"><div class="n"><span class="nf">1</span><span class="nb">#</span></div><div><h3>Установи приложение</h3><p>Скачай <span class="pill">NEEDHYCLO-Setup.exe</span> и запусти <span class="dsh">┅</span> установщик в нашем стиле поставит программу и сам её откроет. Ярлык появится на рабочем столе.</p></div></div>
+      <div class="step reveal"><div class="n"><span class="nf">2</span><span class="nb">#</span></div><div><h3>Открой магазин из каталога</h3><p>На вкладке «Каталог» выбери магазин <span class="dsh">┅</span> он откроется во встроенном браузере. Кнопкой «Перевести на RU» можно перевести страницу.</p></div></div>
+      <div class="step reveal"><div class="n"><span class="nf">3</span><span class="nb">#</span></div><div><h3>Сохрани вещь</h3><p>На странице товара выбери размер и жми на плавающем тулбаре «В вишлист» или «Следить». «Чек прайс» покажет цену в USD/EUR/PLN/UAH по курсу НБУ.</p></div></div>
+      <div class="step reveal"><div class="n"><span class="nf">4</span><span class="nb">#</span></div><div><h3>Посчитай заказ под ключ</h3><p>Кнопка «Расчёт заказа» слева: впиши цену, добавь этапы доставки (Nova Poshta, Meest, форвардер) и получи полную стоимость с таможней в нужной валюте.</p></div></div>
+      <div class="step reveal"><div class="n"><span class="nf">5</span><span class="nb">#</span></div><div><h3>Прокси и адблок <span class="dsh">┅</span> если нужно</h3><p>Слева над курсом НБУ: вставь прокси, если сайт недоступен в Украине, и включи адблок, чтобы убрать рекламу и баннеры куки.</p></div></div>
+      <div class="step reveal"><div class="n"><span class="nf">6</span><span class="nb">#</span></div><div><h3>Обновляйся в один клик</h3><p>Когда выйдет новая версия, при запуске появится уведомление в углу <span class="dsh">┅</span> жми «Обновить». Если обновлений нет, программа просто открывается.</p></div></div>
     </div>
     <div class="cta reveal" style="justify-content:flex-start;margin-top:36px">
       <a class="btn btn-accent" href="https://github.com/44orb/needhyclo-releases/releases/latest/download/NEEDHYCLO-Setup.exe">
