@@ -64,7 +64,9 @@
     background:radial-gradient(120% 80% at 50% 0%,rgba(18,18,18,.35) 0%,rgba(18,18,18,.82) 55%,#121212 100%)}
 
   /* ===== top bar ===== */
-  .topbar{position:sticky;top:0;z-index:40;background:rgba(18,18,18,.86);backdrop-filter:blur(8px);border-bottom:1px solid var(--border)}
+  /* solid (not translucent): in-app browsers (Telegram etc.) don't support backdrop-filter,
+     so a translucent bar let content bleed through — looked glitchy with "air" above it. */
+  .topbar{position:sticky;top:0;z-index:40;background:var(--bg);border-bottom:1px solid var(--border)}
   .marquee{overflow:hidden;padding:7px 0;font-family:var(--mono);font-size:10px;letter-spacing:.4em;text-transform:uppercase;color:var(--muted2)}
   .mq-track{display:inline-flex;white-space:nowrap;will-change:transform;animation:scroll 200s linear infinite}
   @keyframes scroll{from{transform:translateX(0)}to{transform:translateX(-50%)}}
@@ -134,6 +136,21 @@
   .feat .k{font-family:var(--mono);font-size:10px;letter-spacing:.2em;color:var(--accent);text-transform:uppercase}
   .feat h3{font-size:15px;margin-top:9px;letter-spacing:0}
   .feat p{margin:9px 0 0;color:var(--muted);font-size:14px}
+
+  /* ===== feature carousel (compact, swipe / auto-advance) ===== */
+  .car{position:relative}
+  .car-track{display:flex;gap:14px;overflow-x:auto;scroll-snap-type:x mandatory;scroll-behavior:smooth;
+    padding:6px 2px 10px;scrollbar-width:none;-ms-overflow-style:none}
+  .car-track::-webkit-scrollbar{display:none}
+  .car-item{flex:0 0 300px;scroll-snap-align:start}
+  .car-ctl{display:flex;align-items:center;justify-content:flex-end;gap:14px;margin-top:16px}
+  .car-btn{width:42px;height:42px;display:inline-flex;align-items:center;justify-content:center;line-height:1;
+    border:1px solid var(--border-light);background:transparent;color:var(--text);font-family:var(--mono);font-size:22px;
+    transition:.18s ease;cursor:inherit}
+  .car-btn:hover{border-color:var(--accent);color:var(--accent);transform:translateY(-2px)}
+  .car-pos{font-family:var(--mono);font-size:12px;letter-spacing:.22em;color:var(--muted2)}
+  .car-pos b{color:var(--accent);font-weight:700}
+  .car-sep{margin:0 7px;color:var(--border-light)}
 
   /* ===== steps ===== */
   .steps{display:grid;gap:12px}
@@ -286,6 +303,8 @@
     .nav .links{justify-content:center}
     .sec-head{margin-bottom:22px}
     .grid{grid-template-columns:1fr;gap:10px}
+    .car-item{flex:0 0 86%}
+    .car-ctl{justify-content:center}
     .feat{padding:18px 16px}
     .cta{flex-direction:column}
     .cta .btn{width:100%}
@@ -376,27 +395,31 @@
 <section id="about">
   <div class="wrap">
     <div class="sec-head reveal"><span class="num">01</span><h2 class="quote">Что это</h2></div>
-    <p class="reveal" style="max-width:740px;color:var(--muted);font-size:17px;margin:0 0 30px">
-      NEEDHYCLO <span class="dsh">┅</span> десктоп-приложение, которое заменяет байеру десяток вкладок, табличку в Excel и калькулятор.
-      Открываешь магазины во встроенном браузере, ищешь вещь сразу по всем стокам, сохраняешь в вишлист одним кликом,
-      следишь за ценой и наличием через радар и считаешь полную стоимость под ключ <span class="dsh">┅</span> в любой валюте по курсу НБУ.
-      Без сервера и подписок: все данные хранятся локально.
+    <p class="reveal" style="max-width:660px;color:var(--muted);font-size:17px;margin:0 0 26px">
+      Один инструмент вместо десятка вкладок, таблицы в Excel и калькулятора. Листай <span class="dsh">┅</span> вот что внутри.
     </p>
-    <div class="grid">
-      <div class="feat reveal"><div class="k">Каталог</div><h3>76+ магазинов</h3><p>Аутлеты, флеш-сейлы, sale ритейлеров, UK-кластер, США off-price, Азия, ресейл, B2B, sample sales, парфюм. С описанием, странами и фильтром «доставка в Украину». Можно добавлять свои.</p></div>
-      <div class="feat reveal"><div class="k">Сёрчер</div><h3>Поиск по всем сразу</h3><p>Один запрос — результаты со всех магазинов, с ценой «под ключ» и подсветкой, где выгоднее. Параметры до запуска: где искать, потолок цены, размер, валюта, в наличии.</p></div>
-      <div class="feat reveal"><div class="k">Радар</div><h3>Цена и наличие</h3><p>Следит за вишлистом и наблюдением: что подешевело, что снова в наличии, где цена дошла до твоей цели. Защищённые магазины проверяются через встроенный браузер.</p></div>
-      <div class="feat reveal"><div class="k">Расчёт</div><h3>Стоимость под ключ</h3><p>Товар + комиссия оплаты + многоэтапная доставка (Nova Poshta вживую, Meest, форвардеры) + таможня €150. Итог в ₴ / $ / € / zł. Консолидация посылок.</p></div>
-      <div class="feat reveal"><div class="k">Аутфиты</div><h3>Конструктор образов</h3><p>Собери лук из сохранённых вещей на холсте, убери фон, посчитай итоговую стоимость комплекта и сохрани превью.</p></div>
-      <div class="feat reveal"><div class="k">Мои размеры</div><h3>Твой размер на виду</h3><p>Профиль по категориям (верх / низ / обувь / аксессуары). На карточках и в Сёрчере подходящие вещи помечаются значком «твой размер».</p></div>
-      <div class="feat reveal"><div class="k">Вишлист</div><h3>Сохраняй в один клик</h3><p>Плавающий тулбар на странице товара: «В вишлист», «Следить», «Чек прайс». С фото, брендом и ценой выбранного размера. Папки, заметки, целевая цена.</p></div>
-      <div class="feat reveal"><div class="k">Браузер</div><h3>Встроенные вкладки</h3><p>Полноценный браузер магазинов внутри окна — с реальной сессией, логином в свои кабинеты и переводом любой страницы на русский.</p></div>
-      <div class="feat reveal"><div class="k">Автозаполнение</div><h3>Чекаут без рутины</h3><p>Профиль доставки заполняет адрес на странице оформления одной кнопкой. Форму не отправляет и платёжные поля не трогает — только на доменах магазинов из каталога.</p></div>
-      <div class="feat reveal"><div class="k">Google-вход</div><h3>Сессия один раз</h3><p>Войди в Google один раз — кнопка «Google» в тулбаре авторизует на сайтах магазинов. Пароль вводишь только ты; приложение его не видит.</p></div>
-      <div class="feat reveal"><div class="k">Курс НБУ</div><h3>Живой курс гривны</h3><p>Официальный курс НБУ обновляется на лету — конвертация цен в USD / EUR / PLN / UAH без ручного ввода.</p></div>
-      <div class="feat reveal"><div class="k">Прокси · Адблок</div><h3>Доступ и чистота</h3><p>Свой прокси (ip:port:логин:пароль) открывает сайты, недоступные в Украине. Встроенный адблок прячет рекламу и баннеры куки одним тумблером.</p></div>
-      <div class="feat reveal"><div class="k">Форвардеры</div><h3>Доставка в Украину</h3><p>Справочник сервисов пересылки с зарубежных складов: Nova Poshta Global, Meest Shopping и др. — со складами и пометками.</p></div>
-      <div class="feat reveal"><div class="k">Приватность</div><h3>Локально и офлайн</h3><p>Всё в локальной базе на твоём ПК, без сервера и аккаунта. Бэкап в JSON в один клик. Обновления прилетают сами — подписанные.</p></div>
+    <div class="car reveal">
+      <div class="car-track" id="featTrack">
+        <div class="car-item feat"><div class="k">Каталог</div><h3>76+ магазинов</h3><p>Аутлеты, флеш-сейлы, sale ритейлеров, UK-кластер, США off-price, Азия, ресейл, B2B, sample sales, парфюм. С описанием, странами и фильтром «доставка в Украину». Можно добавлять свои.</p></div>
+        <div class="car-item feat"><div class="k">Сёрчер</div><h3>Поиск по всем сразу</h3><p>Один запрос — результаты со всех магазинов, с ценой «под ключ» и подсветкой, где выгоднее. Параметры до запуска: где искать, потолок цены, размер, валюта, в наличии.</p></div>
+        <div class="car-item feat"><div class="k">Радар</div><h3>Цена и наличие</h3><p>Следит за вишлистом и наблюдением: что подешевело, что снова в наличии, где цена дошла до твоей цели. Защищённые магазины проверяются через встроенный браузер.</p></div>
+        <div class="car-item feat"><div class="k">Расчёт</div><h3>Стоимость под ключ</h3><p>Товар + комиссия оплаты + многоэтапная доставка (Nova Poshta вживую, Meest, форвардеры) + таможня €150. Итог в ₴ / $ / € / zł. Консолидация посылок.</p></div>
+        <div class="car-item feat"><div class="k">Аутфиты</div><h3>Конструктор образов</h3><p>Собери лук из сохранённых вещей на холсте, убери фон, посчитай итоговую стоимость комплекта и сохрани превью.</p></div>
+        <div class="car-item feat"><div class="k">Мои размеры</div><h3>Твой размер на виду</h3><p>Профиль по категориям (верх / низ / обувь / аксессуары). На карточках и в Сёрчере подходящие вещи помечаются значком «твой размер».</p></div>
+        <div class="car-item feat"><div class="k">Вишлист</div><h3>Сохраняй в один клик</h3><p>Плавающий тулбар на странице товара: «В вишлист», «Следить», «Чек прайс». С фото, брендом и ценой выбранного размера. Папки, заметки, целевая цена.</p></div>
+        <div class="car-item feat"><div class="k">Браузер</div><h3>Встроенные вкладки</h3><p>Полноценный браузер магазинов внутри окна — с реальной сессией, логином в свои кабинеты и переводом любой страницы на русский.</p></div>
+        <div class="car-item feat"><div class="k">Автозаполнение</div><h3>Чекаут без рутины</h3><p>Профиль доставки заполняет адрес на странице оформления одной кнопкой. Форму не отправляет и платёжные поля не трогает — только на доменах магазинов из каталога.</p></div>
+        <div class="car-item feat"><div class="k">Google-вход</div><h3>Сессия один раз</h3><p>Войди в Google один раз — кнопка «Google» в тулбаре авторизует на сайтах магазинов. Пароль вводишь только ты; приложение его не видит.</p></div>
+        <div class="car-item feat"><div class="k">Курс НБУ</div><h3>Живой курс гривны</h3><p>Официальный курс НБУ обновляется на лету — конвертация цен в USD / EUR / PLN / UAH без ручного ввода.</p></div>
+        <div class="car-item feat"><div class="k">Прокси · Адблок</div><h3>Доступ и чистота</h3><p>Свой прокси (ip:port:логин:пароль) открывает сайты, недоступные в Украине. Встроенный адблок прячет рекламу и баннеры куки одним тумблером.</p></div>
+        <div class="car-item feat"><div class="k">Форвардеры</div><h3>Доставка в Украину</h3><p>Справочник сервисов пересылки с зарубежных складов: Nova Poshta Global, Meest Shopping и др. — со складами и пометками.</p></div>
+        <div class="car-item feat"><div class="k">Приватность</div><h3>Локально и офлайн</h3><p>Всё в локальной базе на твоём ПК, без сервера и аккаунта. Бэкап в JSON в один клик. Обновления прилетают сами — подписанные.</p></div>
+      </div>
+      <div class="car-ctl">
+        <button class="car-btn" id="carPrev" type="button" aria-label="Назад" data-tip="Назад">&lsaquo;</button>
+        <span class="car-pos"><b id="carPos">01</b><span class="car-sep">/</span>14</span>
+        <button class="car-btn" id="carNext" type="button" aria-label="Вперёд" data-tip="Вперёд">&rsaquo;</button>
+      </div>
     </div>
   </div>
 </section>
@@ -540,29 +563,6 @@
       </div>
     </div>
 
-    <div class="show reveal">
-      <div class="sw-ui">
-        <div class="sw-side">
-          <div class="sw-srow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.6 2.7 2.6 15.3 0 18M12 3c-2.6 2.7-2.6 15.3 0 18"/></svg>Прокси<span class="r">вкл</span></div>
-          <div class="sw-srow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3 4 6v6c0 5 3.5 8 8 9 4.5-1 8-4 8-9V6l-8-3Z"/></svg>Адблок<span class="sw-tg"></span></div>
-          <div class="sw-tick">
-            <div class="sw-tk-head"><span>Курс НБУ · сегодня</span><span class="rf">↻</span></div>
-            <div class="sw-tk-rates"><span>$&nbsp;44.81</span><span>€&nbsp;51.86</span><b>zł&nbsp;12.21</b></div>
-          </div>
-          <div class="sw-cta">Расчёт заказа</div>
-        </div>
-      </div>
-      <div class="panel">
-        <div class="k">Слева под рукой</div>
-        <h3>Курс, прокси, адблок</h3>
-        <p>Боковая панель держит главное в одном месте, не отвлекая от покупок. А счётчики на «Радаре» и «Аутфитах» всегда показывают, сколько там вещей.</p>
-        <ul class="pros">
-          <li><b>Живой курс НБУ:</b> $ / € / zł / ₴ обновляются на лету.</li>
-          <li><b>Прокси</b> (ip:port:логин:пароль): открывай сайты, недоступные в Украине.</li>
-          <li><b>Адблок:</b> убирает рекламу и баннеры куки одним тумблером.</li>
-        </ul>
-      </div>
-    </div>
   </div>
 </section>
 
@@ -647,6 +647,26 @@
       entries.forEach(function(e){ if(e.isIntersecting) setActive(e.target.id); });
     }, { rootMargin: "-45% 0px -50% 0px", threshold: 0 });
     document.querySelectorAll('section[id]').forEach(function(s){ spyIO.observe(s); });
+  })();
+</script>
+<script>
+  /* feature carousel — arrows + swipe + slow auto-advance (stops on first touch) */
+  (function(){
+    var track=document.getElementById('featTrack');
+    if(!track) return;
+    var pos=document.getElementById('carPos');
+    var n=track.children.length, timer=null;
+    function step(){ return track.children[0].getBoundingClientRect().width + 14; }
+    function cur(){ return Math.round(track.scrollLeft/step()); }
+    function fmt(c){ return (c<9?'0':'')+(c+1); }
+    function go(i){ i=(i+n)%n; pos.textContent=fmt(i); track.scrollTo({left:i*step(), behavior:'smooth'}); }
+    document.getElementById('carNext').addEventListener('click', function(){ stop(); go(cur()+1); });
+    document.getElementById('carPrev').addEventListener('click', function(){ stop(); go(cur()-1); });
+    track.addEventListener('scroll', function(){ pos.textContent=fmt(Math.max(0,Math.min(n-1,cur()))); }, {passive:true});
+    function stop(){ if(timer){ clearInterval(timer); timer=null; } }
+    function startAuto(){ timer=setInterval(function(){ var c=cur(); go(c+1>=n?0:c+1); }, 4500); }
+    ['pointerdown','touchstart','mouseenter','focusin'].forEach(function(ev){ track.addEventListener(ev, stop, {passive:true}); });
+    if(!matchMedia('(prefers-reduced-motion:reduce)').matches) startAuto();
   })();
 </script>
 <script>
