@@ -44,8 +44,10 @@
   .dsh{font-family:var(--mono);color:var(--muted2);letter-spacing:.04em}
   section[id]{scroll-margin-top:84px}
 
-  /* ===== custom crosshair (registration-mark) cursor site-wide ===== */
-  html{cursor:url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%2232%22%20height%3D%2232%22%20viewBox%3D%220%200%2032%2032%22%3E%3Cg%20fill%3D%22none%22%20stroke%3D%22%23121212%22%20stroke-width%3D%223.4%22%20stroke-linecap%3D%22round%22%3E%3Cpath%20d%3D%22M16%202.5v8.5M16%2021v8.5M2.5%2016h8.5M21%2016h8.5%22%2F%3E%3Ccircle%20cx%3D%2216%22%20cy%3D%2216%22%20r%3D%226.6%22%2F%3E%3C%2Fg%3E%3Cg%20fill%3D%22none%22%20stroke%3D%22%23ECEAE3%22%20stroke-width%3D%221.6%22%20stroke-linecap%3D%22round%22%3E%3Cpath%20d%3D%22M16%202.5v8.5M16%2021v8.5M2.5%2016h8.5M21%2016h8.5%22%2F%3E%3C%2Fg%3E%3Ccircle%20cx%3D%2216%22%20cy%3D%2216%22%20r%3D%221.1%22%20fill%3D%22%23EDE13B%22%2F%3E%3C%2Fsvg%3E") 16 16,crosshair}
+  /* ===== custom crosshair (registration-mark) cursor site-wide =====
+     PNG (not SVG): Chromium on Windows silently ignores SVG data-URI cursors and
+     falls back to the OS crosshair — a PNG renders the branded mark everywhere. */
+  html{cursor:url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAADyElEQVR4AexWSUxTYRCeQgInDOtBFm1JFLyoB0VJNKkQEreA1KMorUtYWow3MdHQRo3eTLQoHrRW8SgtLoUEwZfooVZNjBchRlqlcKKAnJQE6nx/+pqXKrzXR6IxsWH+f/5lZr43yz9k0F/+rQpAfn5+Fyg3N9dIOn+6AcCwpbHe6bC3OjMyMpp12ifdAOLxuNnS2EA7d2wn8H8cgF6DqXK6PZCqSO/63wfA8df78UIubQ8g+/Py8l6UlZaYc9bkUFFRIa0rK63m/TBTl9CaxqAZAGodhlF2n8Y+mEeGB2hTZQWVl5to+Hkge2Q4YMQZgwjjrlYMmgBAIX9l+OGDu+bTHW0UnZyk6zdu0cfRMUGd5y4IezgDEJNx/UuWMYtNlUETAIPB4Ll65SJVVW0Thmtq90e6b96WhoZGyOvtJZ//id9ma4kCVGlJCV2+5Czlx8lDGn6qANilXYctDWbZuLu7597MzIxpcXHRxryzz/fYGYvFGsORL7uxBgjc5XAYIauGQRUAK7A6HK0UCr0lNhBh4zbeo7m5OfAuXrvk9dLSkncgMBjEXYulHttWDCtREgDQIslSiYWNcGvw9RviULzn2CYbz3Rklx3Ed8QfQH0OR0ZxFzJcKWtT9WENW7IeAQAbFm4sSDIl9d6/Yx4M+IXygwf2kr295RDHVjQeGDYY4m4QeFxK6LHW1dVgSW73tWzoUOoEz+FJNjABALeLi4sx/UI/FhbEHuapqSnBrzRAT3ZWlriCmb0meOWg1CMAIHYcX+eRo8clJTUdOxG0288IWWQ8sl2OeaHxVXc8bnCAwOMS9HB1+J8+G8SSTp5qJ6U+mUfiynoEAMQOG7Ozs3tSqHoiOimh7pFU/OxuFZoTAwyDEkuRmAwiFy0ae5BN0Sf0wxbOQQIAmOWIXSi53T2EpOLYobSS9Y2Yg+SEYt7T4WgTJYvHCbLL6ZX3VQHwF3kf9fVLcmkxCCsbChcUFPiQuLx2ZmZmerDHvBWvIe5CRvmlssHUWRUAwsOut+GLQqF3BAN4blERzc1NhIxnnntDwIizEL8XnDv4L8mVaux3a1UAEAKIrxNR09nO8xJeOoQDxtCMQOBxD2dsPMJeM7GMhD010gQASlhhBJ5AtWyo2CzV1O6j8fGwaEYbK7cQ+gPO2O0wHoGMFtIMAMoAgg24kNmc4cHp6RjNf5uHuyXeNzFpcjt0yZQWAFkoMX/HzJmOSTetBoBuo0rB/wB0e4BjL6Ht9vn60aY1lZzS9TKvGwDXuhdlp2wsstJ0Zt0A5JJUKz01MD8BAAD//1fD1J0AAAAGSURBVAMAI30XX6abWE4AAAAASUVORK5CYII=") 16 16,crosshair}
   *{cursor:inherit}
 
   /* ===== animated crossing hazard ribbons (background) ===== */
@@ -112,10 +114,6 @@
   .cta{margin-top:36px;display:flex;gap:12px;justify-content:center;flex-wrap:wrap}
   .meta{margin-top:16px;font-family:var(--mono);font-size:11px;color:var(--muted2);letter-spacing:.1em}
   .reg{position:absolute;width:16px;height:16px;color:var(--muted2)}
-  .stats{margin:38px auto 0;display:flex;gap:10px;justify-content:center;flex-wrap:wrap;max-width:760px}
-  .stat{flex:1;min-width:150px;border:1px solid var(--border);background:rgba(24,24,24,.7);padding:16px 14px}
-  .stat .v{font-family:var(--mono);font-size:24px;font-weight:800;color:var(--accent);line-height:1}
-  .stat .l{margin-top:7px;font-family:var(--mono);font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:var(--muted)}
 
   /* ===== sections ===== */
   section{padding:64px 0}
@@ -291,7 +289,6 @@
     .feat{padding:18px 16px}
     .cta{flex-direction:column}
     .cta .btn{width:100%}
-    .stats{gap:8px}.stat{min-width:0;padding:13px 10px}.stat .v{font-size:20px}
     .btn{padding:14px 18px}
     .sw-g2{grid-template-columns:1fr}
     .panel p{font-size:14px}
@@ -373,11 +370,6 @@
       <a class="btn" href="#how">Как пользоваться</a>
     </div>
     <div class="meta reveal">Windows 10/11 · 64-bit · автообновление · данные только на твоём ПК</div>
-    <div class="stats reveal">
-      <div class="stat"><div class="v">76+</div><div class="l">Магазинов в каталоге</div></div>
-      <div class="stat"><div class="v">1 клик</div><div class="l">Цена под ключ</div></div>
-      <div class="stat"><div class="v">∞</div><div class="l">Без подписок и сервера</div></div>
-    </div>
   </div>
 </header>
 
