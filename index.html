@@ -2,9 +2,9 @@
 <html lang="ru">
 <head>
 <meta charset="utf-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
 <title>NEEDHYCLO® ┅ c/o fashion buyer</title>
-<meta name="description" content="NEEDHYCLO ┅ десктоп-приложение для байера брендовой одежды. Каталог магазинов, встроенный браузер, расчёт заказа под ключ, прокси, адблок. Полностью офлайн." />
+<meta name="description" content="NEEDHYCLO ┅ десктоп для байера брендовой одежды: каталог из 76+ магазинов, поиск по всем сразу с ценой «под ключ», радар цен и наличия, конструктор аутфитов, расчёт с доставкой и таможней. Встроенный браузер, перевод, адблок, прокси. Полностью офлайн." />
 <meta name="theme-color" content="#121212" />
 <link rel="icon" type="image/svg+xml" href="favicon.svg" />
 <link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png" />
@@ -13,7 +13,7 @@
 <meta property="og:type" content="website" />
 <meta property="og:site_name" content="NEEDHYCLO®" />
 <meta property="og:title" content="NEEDHYCLO® ┅ c/o fashion buyer" />
-<meta property="og:description" content="Десктоп для байера брендовой одежды: каталог магазинов, встроенный браузер, расчёт заказа под ключ. Полностью офлайн." />
+<meta property="og:description" content="Десктоп для байера брендовой одежды: каталог, поиск по всем магазинам, радар цен, аутфиты, расчёт «под ключ». Полностью офлайн." />
 <meta property="og:url" content="https://44orb.github.io/needhyclo-releases/" />
 <meta property="og:image" content="https://44orb.github.io/needhyclo-releases/og.png" />
 <meta property="og:image:width" content="1200" />
@@ -27,7 +27,7 @@
   :root{
     --bg:#121212; --surface:#181818; --surface2:#202020; --border:#323232;
     --border-light:#484848; --text:#ECEAE3; --muted:#8E8B82; --muted2:#5E5C55;
-    --accent:#EDE13B; --accent-hover:#F4EC5C;
+    --accent:#EDE13B; --accent-hover:#F4EC5C; --ok:#A6C56B; --danger:#D9543F;
     --sans:"Helvetica Neue",Helvetica,Arial,sans-serif;
     --mono:Consolas,"SF Mono",ui-monospace,monospace;
   }
@@ -42,14 +42,14 @@
   .quote::before{content:"\201C";color:var(--muted2)}
   .quote::after{content:"\201D";color:var(--muted2)}
   .dsh{font-family:var(--mono);color:var(--muted2);letter-spacing:.04em}
+  section[id]{scroll-margin-top:84px}
 
   /* ===== custom crosshair (registration-mark) cursor site-wide ===== */
-  html{cursor:url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%2232%22%20height%3D%2232%22%20viewBox%3D%220%200%2032%2032%22%3E%3Cg%20fill%3D%22none%22%20stroke%3D%22%23121212%22%20stroke-width%3D%223.4%22%20stroke-linecap%3D%22round%22%3E%3Cpath%20d%3D%22M16%202.5v8.5M16%2021v8.5M2.5%2016h8.5M21%2016h8.5%22%2F%3E%3Ccircle%20cx%3D%2216%22%20cy%3D%2216%22%20r%3D%226.6%22%2F%3E%3C%2Fg%3E%3Cg%20fill%3D%22none%22%20stroke%3D%22%23ECEAE3%22%20stroke-width%3D%221.6%22%20stroke-linecap%3D%22round%22%3E%3Cpath%20d%3D%22M16%202.5v8.5M16%2021v8.5M2.5%2016h8.5M21%2016h8.5%22%2F%3E%3Ccircle%20cx%3D%2216%22%20cy%3D%2216%22%20r%3D%226.6%22%2F%3E%3C%2Fg%3E%3Ccircle%20cx%3D%2216%22%20cy%3D%2216%22%20r%3D%221.1%22%20fill%3D%22%23EDE13B%22%2F%3E%3C%2Fsvg%3E") 16 16,crosshair}
+  html{cursor:url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%2232%22%20height%3D%2232%22%20viewBox%3D%220%200%2032%2032%22%3E%3Cg%20fill%3D%22none%22%20stroke%3D%22%23121212%22%20stroke-width%3D%223.4%22%20stroke-linecap%3D%22round%22%3E%3Cpath%20d%3D%22M16%202.5v8.5M16%2021v8.5M2.5%2016h8.5M21%2016h8.5%22%2F%3E%3Ccircle%20cx%3D%2216%22%20cy%3D%2216%22%20r%3D%226.6%22%2F%3E%3C%2Fg%3E%3Cg%20fill%3D%22none%22%20stroke%3D%22%23ECEAE3%22%20stroke-width%3D%221.6%22%20stroke-linecap%3D%22round%22%3E%3Cpath%20d%3D%22M16%202.5v8.5M16%2021v8.5M2.5%2016h8.5M21%2016h8.5%22%2F%3E%3C%2Fg%3E%3Ccircle%20cx%3D%2216%22%20cy%3D%2216%22%20r%3D%221.1%22%20fill%3D%22%23EDE13B%22%2F%3E%3C%2Fsvg%3E") 16 16,crosshair}
   *{cursor:inherit}
 
   /* ===== animated crossing hazard ribbons (background) ===== */
   .ribbons{position:fixed;inset:0;z-index:0;overflow:hidden;pointer-events:none}
-  /* opaque so crossings stay clean (one tape over another, no muddy blend) */
   .ribbon{position:absolute;left:-30%;width:160%;height:84px;
     background:repeating-linear-gradient(-45deg,#201e15 0,#201e15 22px,#131313 22px,#131313 44px)}
   .ribbon.r1{top:12%;transform:rotate(-19deg);animation:flow 26s linear infinite}
@@ -58,7 +58,6 @@
   .ribbon.r4{top:92%;transform:rotate(16deg);animation:flowR 30s linear infinite}
   @keyframes flow{from{background-position:0 0}to{background-position:1240px 0}}
   @keyframes flowR{from{background-position:0 0}to{background-position:-1240px 0}}
-  /* darken edges so text stays crisp over the ribbons */
   .veil{position:fixed;inset:0;z-index:1;pointer-events:none;
     background:radial-gradient(120% 80% at 50% 0%,rgba(18,18,18,.35) 0%,rgba(18,18,18,.82) 55%,#121212 100%)}
 
@@ -66,7 +65,6 @@
   .topbar{position:sticky;top:0;z-index:40;background:rgba(18,18,18,.86);backdrop-filter:blur(8px);border-bottom:1px solid var(--border)}
   .marquee{overflow:hidden;padding:7px 0;font-family:var(--mono);font-size:10px;letter-spacing:.4em;text-transform:uppercase;color:var(--muted2)}
   .mq-track{display:inline-flex;white-space:nowrap;will-change:transform;animation:scroll 200s linear infinite}
-  .mq-track b{font-weight:inherit}
   @keyframes scroll{from{transform:translateX(0)}to{transform:translateX(-50%)}}
   .haz-strip{height:6px;background:repeating-linear-gradient(-45deg,var(--accent) 0,var(--accent) 10px,#121212 10px,#121212 20px)}
 
@@ -80,6 +78,17 @@
   .nav .brand .name{font-size:18px;font-weight:800;text-transform:uppercase}
   .nav .brand .name sup{font-size:9px;color:var(--muted);vertical-align:super}
   .nav .links{display:flex;gap:8px;flex-wrap:wrap}
+
+  /* ===== left scroll-spy rail (desktop) — shows which block you're on ===== */
+  .spy{position:fixed;left:18px;top:50%;transform:translateY(-50%);z-index:35;display:flex;flex-direction:column;gap:3px}
+  .spy a{position:relative;display:flex;align-items:center;height:28px;padding-left:11px;border-left:2px solid var(--border);
+    font-family:var(--mono);font-size:11px;letter-spacing:.08em;color:var(--muted2);transition:color .2s,border-color .2s}
+  .spy a:hover{color:var(--text);border-left-color:var(--border-light)}
+  .spy a.active{color:var(--accent);border-left-color:var(--accent)}
+  .spy a .t{position:absolute;left:32px;white-space:nowrap;padding:4px 9px;background:var(--surface);border:1px solid var(--border-light);
+    font-size:9px;letter-spacing:.18em;text-transform:uppercase;color:var(--text);opacity:0;transform:translateX(-6px);pointer-events:none;transition:opacity .2s,transform .2s}
+  .spy a:hover .t,.spy a.active .t{opacity:1;transform:none}
+  .spy a.active .t{color:var(--accent);border-color:var(--accent)}
 
   /* ===== buttons ===== */
   .btn{display:inline-flex;align-items:center;justify-content:center;gap:11px;border:1px solid var(--border-light);
@@ -99,10 +108,14 @@
   .hero h1{font-size:clamp(42px,8.5vw,90px);line-height:.9;margin-top:28px}
   .hero h1 sup{font-size:.26em;color:var(--muted);vertical-align:super}
   .hero .tag{margin-top:14px;font-family:var(--mono);font-size:11px;letter-spacing:.42em;text-transform:uppercase;color:var(--muted2)}
-  .hero .lede{max-width:640px;margin:26px auto 0;color:var(--muted);font-size:17px}
+  .hero .lede{max-width:660px;margin:26px auto 0;color:var(--muted);font-size:17px}
   .cta{margin-top:36px;display:flex;gap:12px;justify-content:center;flex-wrap:wrap}
   .meta{margin-top:16px;font-family:var(--mono);font-size:11px;color:var(--muted2);letter-spacing:.1em}
   .reg{position:absolute;width:16px;height:16px;color:var(--muted2)}
+  .stats{margin:38px auto 0;display:flex;gap:10px;justify-content:center;flex-wrap:wrap;max-width:760px}
+  .stat{flex:1;min-width:150px;border:1px solid var(--border);background:rgba(24,24,24,.7);padding:16px 14px}
+  .stat .v{font-family:var(--mono);font-size:24px;font-weight:800;color:var(--accent);line-height:1}
+  .stat .l{margin-top:7px;font-family:var(--mono);font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:var(--muted)}
 
   /* ===== sections ===== */
   section{padding:64px 0}
@@ -111,9 +124,8 @@
   .sec-head .num{font-family:var(--mono);font-size:12px;color:var(--accent);letter-spacing:.2em}
 
   /* ===== feature grid ===== */
-  .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:14px}
+  .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(270px,1fr));gap:14px}
   .feat{position:relative;border:1px solid var(--border);background:rgba(24,24,24,.78);padding:22px 20px;transition:.2s ease;overflow:hidden}
-  /* accent line draws around the whole perimeter on hover (top→right→bottom→left) */
   .feat::before,.feat::after{content:"";position:absolute;width:0;height:0;box-sizing:border-box;pointer-events:none;z-index:1}
   .feat::before{top:0;left:0;border-top:2px solid var(--accent);border-right:2px solid var(--accent);
     transition:width .2s linear,height .2s linear .2s}
@@ -129,7 +141,6 @@
   .steps{display:grid;gap:12px}
   .step{display:flex;gap:16px;border:1px solid var(--border);background:rgba(24,24,24,.78);padding:18px 20px;transition:.2s ease;perspective:600px}
   .step:hover{border-color:var(--border-light);transform:translateX(4px);background:var(--surface)}
-  /* the number cube flips over on hover, revealing a # on the same yellow face */
   .step .n{position:relative;flex:none;width:30px;height:30px;transform-style:preserve-3d;
            transition:transform .6s cubic-bezier(.5,-0.35,.3,1.5)}
   .step:hover .n{transform:rotateX(-180deg)}
@@ -150,13 +161,13 @@
   .reveal.in{opacity:1;transform:none}
   @media (prefers-reduced-motion:reduce){
     .reveal{opacity:1;transform:none;transition:none}
-    .ribbon,.haz-strip,.marquee span,.btn-accent svg{animation:none}
+    .ribbon,.haz-strip,.mq-track,.btn-accent svg{animation:none}
+    html{scroll-behavior:auto}
   }
 
-  /* ===== download notice (top-right) + background blur to focus attention ===== */
+  /* ===== download notice (top-right) + background blur ===== */
   .dl-veil{position:fixed;inset:0;z-index:120;opacity:0;pointer-events:none;
-    background:rgba(18,18,18,.34);backdrop-filter:blur(4px);-webkit-backdrop-filter:blur(4px);
-    transition:opacity .4s ease}
+    background:rgba(18,18,18,.34);backdrop-filter:blur(4px);-webkit-backdrop-filter:blur(4px);transition:opacity .4s ease}
   .dl-veil.in{opacity:1;pointer-events:auto}
   .dl-note{position:fixed;top:16px;right:14px;z-index:129;width:300px;background:var(--surface);
     border:1px solid var(--border-light);box-shadow:0 20px 54px -16px rgba(0,0,0,.75);
@@ -169,15 +180,12 @@
   .dl-note .file{margin-top:4px;font-family:var(--mono);font-size:11px;color:var(--muted2);letter-spacing:.04em}
   .dl-note p{margin:10px 0 0;font-size:12.5px;color:var(--muted);line-height:1.55}
   .dl-note .di{display:inline-block;width:13px;height:13px;vertical-align:-2px;color:var(--text)}
-  .dl-note .x{position:absolute;top:7px;right:8px;width:24px;height:24px;border:0;background:none;
-    color:var(--muted2);cursor:inherit;font-size:17px;line-height:1}
+  .dl-note .x{position:absolute;top:7px;right:8px;width:24px;height:24px;border:0;background:none;color:var(--muted2);cursor:inherit;font-size:17px;line-height:1}
   .dl-note .x:hover{color:var(--text)}
-  @media (max-width:480px){.dl-note{left:10px;right:10px;width:auto;top:12px}}
 
   /* ===== showcase: recreated app UI + annotations ===== */
   .show{display:grid;grid-template-columns:1.05fr .95fr;gap:40px;align-items:center;margin-top:30px}
   .show + .show{margin-top:48px}
-  @media (max-width:860px){.show{grid-template-columns:1fr;gap:24px}.show .sw-ui{order:-1}}
   .panel .k{font-family:var(--mono);font-size:10px;letter-spacing:.3em;text-transform:uppercase;color:var(--accent)}
   .panel h3{font-size:clamp(19px,2.4vw,25px);margin-top:11px;letter-spacing:0}
   .panel p{margin:13px 0 0;color:var(--muted);font-size:15px;line-height:1.6}
@@ -194,6 +202,7 @@
   .sw-nhc::after{content:"";position:absolute;left:1px;right:1px;bottom:1px;height:3px;background:var(--accent)}
   .sw-ttl{font-family:var(--mono);font-size:11px;letter-spacing:.18em;text-transform:uppercase}
   .sw-new{margin-left:auto;font-family:var(--mono);font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);border:1px solid var(--border-light);padding:4px 8px}
+  .sw-new.acc{color:#121212;background:var(--accent);border-color:var(--accent)}
   .sw-pad{padding:15px}
   .sw-lbl{font-family:var(--mono);font-size:9px;letter-spacing:.22em;text-transform:uppercase;color:var(--accent);display:flex;justify-content:space-between;align-items:baseline}
   .sw-lbl .a{color:var(--muted);letter-spacing:.04em}
@@ -212,6 +221,20 @@
   .sw-total .k2{font-family:var(--mono);font-size:11px;letter-spacing:.2em;text-transform:uppercase}
   .sw-total .big{font-family:var(--mono);font-size:21px;font-weight:800;color:var(--accent);line-height:1}
   .sw-total .cur{font-family:var(--mono);font-size:10px;color:var(--muted2)}
+
+  /* result rows (searcher / radar) */
+  .rrow{display:flex;align-items:center;gap:10px;border:1px solid var(--border);background:#141414;padding:9px 11px;font-size:12.5px}
+  .rrow.best{border-color:var(--accent);box-shadow:inset 0 0 0 1px rgba(237,225,59,.22)}
+  .rrow .rb{font-family:var(--mono);font-size:9px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);width:62px;flex:none;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .rrow .rn{color:var(--text);flex:1;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .rrow .rp{font-family:var(--mono);color:var(--text);white-space:nowrap}
+  .rrow.best .rp{color:var(--accent)}
+  .rrow .rp small{color:var(--muted2);font-size:9px}
+  .rrow .rp .up{color:var(--ok)} .rrow .rp .dn{color:var(--danger)}
+  .rsec{display:flex;align-items:center;gap:8px;font-family:var(--mono);font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:var(--muted);margin-bottom:7px}
+  .rsec b{color:var(--accent);font-weight:700}
+  .rsec.ok{color:var(--ok)} .rsec.warn{color:var(--accent)} .rsec.dng{color:var(--danger)}
+  .rblock{border:1px solid var(--accent);background:rgba(237,225,59,.06);padding:9px 11px;font-size:11.5px;color:var(--accent);line-height:1.5}
 
   .sw-photo{height:212px;position:relative;background:radial-gradient(130% 130% at 28% 18%,#242424,#131313)}
   .sw-photo::before{content:"";position:absolute;inset:0;background:repeating-linear-gradient(-45deg,rgba(237,225,59,.045) 0 14px,transparent 14px 28px)}
@@ -236,6 +259,46 @@
   .sw-tk-rates{display:flex;gap:14px;margin-top:8px;font-family:var(--mono);font-size:14px;font-weight:700}
   .sw-tk-rates span{color:var(--text)}.sw-tk-rates b{color:var(--accent);font-weight:700}
   .sw-cta{border:1px solid var(--accent);padding:12px;text-align:center;font-family:var(--mono);font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--text)}
+
+  /* outfit canvas mock */
+  .sw-canvas{height:230px;position:relative;background:radial-gradient(130% 130% at 70% 20%,#242424,#131313);display:flex;align-items:center;justify-content:center;gap:12px}
+  .sw-canvas .ob{border:1px solid var(--border-light);background:#141414;width:78px;height:96px;position:relative}
+  .sw-canvas .ob b{position:absolute;left:6px;bottom:6px;font-family:var(--mono);font-size:9px;color:var(--accent)}
+  .sw-canvas .ob:nth-child(2){transform:translateY(-14px)}
+  .sw-canvas .ob:nth-child(3){transform:translateY(10px)}
+  .sw-receipt{position:absolute;right:14px;top:14px;border:1px solid var(--accent);background:rgba(14,14,14,.85);padding:9px 11px;font-family:var(--mono);font-size:11px}
+  .sw-receipt .t{color:var(--muted);font-size:9px;letter-spacing:.16em;text-transform:uppercase}
+  .sw-receipt .b{color:var(--accent);font-size:16px;font-weight:800;margin-top:3px}
+
+  /* ===== mobile optimization ===== */
+  @media (max-width:1180px){ .spy{display:none} }
+  @media (max-width:860px){
+    .show{grid-template-columns:1fr;gap:24px}
+    .show .sw-ui{order:-1}
+  }
+  @media (max-width:680px){
+    .wrap{padding:0 16px}
+    section{padding:46px 0}
+    .hero{padding:48px 0 40px}
+    .hero .logo{width:88px;height:88px;font-size:25px}
+    .hero h1{margin-top:22px}
+    .hero .lede{font-size:15px;margin-top:20px}
+    .nav{flex-direction:column;align-items:stretch;gap:12px;padding:14px 0}
+    .nav .brand{justify-content:center}
+    .nav .links{justify-content:center}
+    .sec-head{margin-bottom:22px}
+    .grid{grid-template-columns:1fr;gap:10px}
+    .feat{padding:18px 16px}
+    .cta{flex-direction:column}
+    .cta .btn{width:100%}
+    .stats{gap:8px}.stat{min-width:0;padding:13px 10px}.stat .v{font-size:20px}
+    .btn{padding:14px 18px}
+    .sw-g2{grid-template-columns:1fr}
+    .panel p{font-size:14px}
+    .pros li{font-size:13.5px}
+    .step{padding:15px 15px;gap:13px}
+  }
+  @media (max-width:380px){ .hero h1{font-size:38px} .sw-fbar{gap:5px;padding:5px} .sw-fbar .pill{padding:6px 7px} }
 </style>
 </head>
 <body>
@@ -248,9 +311,9 @@
   document.addEventListener('dragstart',stop,true);
   document.addEventListener('keydown',function(e){
     var k=(e.key||'').toLowerCase(), mod=e.ctrlKey||e.metaKey;
-    if(k==='f12') return stop(e);                                   /* devtools */
-    if(mod&&e.shiftKey&&(k==='i'||k==='j'||k==='c'||k==='k')) return stop(e); /* inspect/console */
-    if(mod&&(k==='u'||k==='s')) return stop(e);                     /* view-source / save */
+    if(k==='f12') return stop(e);
+    if(mod&&e.shiftKey&&(k==='i'||k==='j'||k==='c'||k==='k')) return stop(e);
+    if(mod&&(k==='u'||k==='s')) return stop(e);
   },true);
 })();
 </script>
@@ -263,8 +326,19 @@
 </div>
 <div class="veil"></div>
 
+<!-- left scroll-spy rail (desktop) -->
+<nav class="spy" aria-label="Разделы">
+  <a href="#about"><span>01</span><span class="t">Что это</span></a>
+  <a href="#searcher"><span>02</span><span class="t">Сёрчер</span></a>
+  <a href="#radar"><span>03</span><span class="t">Радар</span></a>
+  <a href="#calc"><span>04</span><span class="t">Расчёт</span></a>
+  <a href="#wishlist"><span>05</span><span class="t">Вишлист</span></a>
+  <a href="#outfits"><span>06</span><span class="t">Аутфиты</span></a>
+  <a href="#how"><span>07</span><span class="t">Старт</span></a>
+</nav>
+
 <div class="topbar">
-  <div class="marquee"><div class="mq-track"><span>needhyclo® · c/o fashion buyer · serverless · offline · needhyclo® · c/o fashion buyer · serverless · offline · needhyclo® · c/o fashion buyer · serverless · offline · needhyclo® · c/o fashion buyer · serverless · offline · needhyclo® · c/o fashion buyer · serverless · offline · needhyclo® · c/o fashion buyer · serverless · offline · needhyclo® · c/o fashion buyer · serverless · offline · needhyclo® · c/o fashion buyer · serverless · offline · needhyclo® · c/o fashion buyer · serverless · offline · needhyclo® · c/o fashion buyer · serverless · offline · </span><span>needhyclo® · c/o fashion buyer · serverless · offline · needhyclo® · c/o fashion buyer · serverless · offline · needhyclo® · c/o fashion buyer · serverless · offline · needhyclo® · c/o fashion buyer · serverless · offline · needhyclo® · c/o fashion buyer · serverless · offline · needhyclo® · c/o fashion buyer · serverless · offline · needhyclo® · c/o fashion buyer · serverless · offline · needhyclo® · c/o fashion buyer · serverless · offline · needhyclo® · c/o fashion buyer · serverless · offline · needhyclo® · c/o fashion buyer · serverless · offline · </span></div></div>
+  <div class="marquee"><div class="mq-track"><span>needhyclo® · c/o fashion buyer · 76+ магазинов · поиск под ключ · радар цен · аутфиты · serverless · offline · </span><span>needhyclo® · c/o fashion buyer · 76+ магазинов · поиск под ключ · радар цен · аутфиты · serverless · offline · </span></div></div>
   <div class="haz-strip"></div>
 </div>
 
@@ -275,9 +349,10 @@
       <span class="name">Needhyclo<sup>®</sup></span>
     </div>
     <div class="links">
-      <a class="btn btn-sm" href="#about">Описание</a>
-      <a class="btn btn-sm" href="#showcase">Вблизи</a>
-      <a class="btn btn-sm" href="#how">Инструкция</a>
+      <a class="btn btn-sm" href="#about">Возможности</a>
+      <a class="btn btn-sm" href="#radar">Радар</a>
+      <a class="btn btn-sm" href="#how">Старт</a>
+      <a class="btn btn-sm btn-accent" href="https://github.com/44orb/needhyclo-releases/releases/latest/download/NEEDHYCLO-Setup.exe">Скачать</a>
     </div>
   </nav>
 </div>
@@ -289,7 +364,7 @@
     <span class="logo reveal" style="width:108px;height:108px;font-size:31px">NHC</span>
     <h1 class="reveal">Needhyclo<sup>®</sup></h1>
     <div class="tag reveal">c/o · fashion buyer</div>
-    <p class="lede reveal">Рабочий стол байера брендовой одежды. Каталог проверенных магазинов, встроенный браузер, расчёт заказа «под ключ» с доставкой и таможней <span class="dsh">┅</span> всё в одном окне, полностью офлайн.</p>
+    <p class="lede reveal">Рабочий стол байера брендовой одежды. Каталог проверенных магазинов, поиск по всем сразу, радар цен и наличия, конструктор аутфитов и расчёт заказа «под ключ» <span class="dsh">┅</span> всё в одном окне, полностью офлайн.</p>
     <div class="cta reveal">
       <a class="btn btn-accent" href="https://github.com/44orb/needhyclo-releases/releases/latest/download/NEEDHYCLO-Setup.exe">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v11"/><path d="m8 11 4 4 4-4"/><path d="M4 17v2a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-2"/></svg>
@@ -297,42 +372,120 @@
       </a>
       <a class="btn" href="#how">Как пользоваться</a>
     </div>
-    <div class="meta reveal">Windows 10/11 · 64-bit · автоматически качает последнюю версию</div>
+    <div class="meta reveal">Windows 10/11 · 64-bit · автообновление · данные только на твоём ПК</div>
+    <div class="stats reveal">
+      <div class="stat"><div class="v">76+</div><div class="l">Магазинов в каталоге</div></div>
+      <div class="stat"><div class="v">1 клик</div><div class="l">Цена под ключ</div></div>
+      <div class="stat"><div class="v">∞</div><div class="l">Без подписок и сервера</div></div>
+    </div>
   </div>
 </header>
 
 <section id="about">
   <div class="wrap">
     <div class="sec-head reveal"><span class="num">01</span><h2 class="quote">Что это</h2></div>
-    <p class="reveal" style="max-width:720px;color:var(--muted);font-size:17px;margin:0 0 30px">
-      NEEDHYCLO <span class="dsh">┅</span> десктопное приложение для байеров: открываешь магазины во встроенном браузере, сохраняешь вещи в вишлист одним кликом
-      и сразу считаешь полную стоимость заказа под ключ <span class="dsh">┅</span> товар, комиссия оплаты, многоэтапная доставка и таможня, в любой валюте по
-      официальному курсу НБУ. Без сервера и без подписок: все данные хранятся локально на твоём компьютере.
+    <p class="reveal" style="max-width:740px;color:var(--muted);font-size:17px;margin:0 0 30px">
+      NEEDHYCLO <span class="dsh">┅</span> десктоп-приложение, которое заменяет байеру десяток вкладок, табличку в Excel и калькулятор.
+      Открываешь магазины во встроенном браузере, ищешь вещь сразу по всем стокам, сохраняешь в вишлист одним кликом,
+      следишь за ценой и наличием через радар и считаешь полную стоимость под ключ <span class="dsh">┅</span> в любой валюте по курсу НБУ.
+      Без сервера и подписок: все данные хранятся локально.
     </p>
     <div class="grid">
-      <div class="feat reveal"><div class="k">Каталог</div><h3>Проверенные магазины</h3><p>Аутлеты, флеш-сейлы, стоки и ритейлеры с фильтрами по категориям и странам. Открываются прямо в приложении.</p></div>
-      <div class="feat reveal"><div class="k">Браузер</div><h3>Встроенные вкладки</h3><p>Полноценный браузер магазинов внутри окна <span class="dsh">┅</span> с переводом страниц на русский и логином в свои кабинеты.</p></div>
-      <div class="feat reveal"><div class="k">Вишлист</div><h3>Сохраняй в один клик</h3><p>Плавающий тулбар на странице товара: «В вишлист», «Следить», «Чек прайс» <span class="dsh">┅</span> с фото и ценой выбранного размера.</p></div>
-      <div class="feat reveal"><div class="k">Расчёт</div><h3>Стоимость под ключ</h3><p>Товар + комиссия + воронка доставки (Nova Poshta вживую, Meest, форвардеры) + таможня €150. Итог в любой валюте.</p></div>
-      <div class="feat reveal"><div class="k">Курс НБУ</div><h3>Живой курс гривны</h3><p>Официальный курс НБУ обновляется на лету <span class="dsh">┅</span> конвертация цен в USD / EUR / PLN / UAH без ручного ввода.</p></div>
-      <div class="feat reveal"><div class="k">Прокси</div><h3>Обход блокировок</h3><p>Вставь свой прокси (с логином/паролем) <span class="dsh">┅</span> сайты, недоступные в Украине, открываются внутри приложения.</p></div>
-      <div class="feat reveal"><div class="k">Адблок</div><h3>Чистые страницы</h3><p>Встроенный блокировщик прячет навязчивую рекламу и баннеры куки одним тумблером.</p></div>
-      <div class="feat reveal"><div class="k">Обновления</div><h3>Сами прилетают</h3><p>Новые версии приходят автоматически: появилось обновление <span class="dsh">┅</span> увидишь уведомление с кнопкой «Обновить».</p></div>
-      <div class="feat reveal"><div class="k">Хаб</div><h3>Всё в одном месте</h3><p>Не нужно держать кучу вкладок и закладок из разных магазинов: все вещи, списки и расчёты живут в одном приложении. Обычный браузер при этом остаётся свободным.</p></div>
+      <div class="feat reveal"><div class="k">Каталог</div><h3>76+ магазинов</h3><p>Аутлеты, флеш-сейлы, sale ритейлеров, UK-кластер, США off-price, Азия, ресейл, B2B, sample sales, парфюм. С описанием, странами и фильтром «доставка в Украину». Можно добавлять свои.</p></div>
+      <div class="feat reveal"><div class="k">Сёрчер</div><h3>Поиск по всем сразу</h3><p>Один запрос — результаты со всех магазинов, с ценой «под ключ» и подсветкой, где выгоднее. Параметры до запуска: где искать, потолок цены, размер, валюта, в наличии.</p></div>
+      <div class="feat reveal"><div class="k">Радар</div><h3>Цена и наличие</h3><p>Следит за вишлистом и наблюдением: что подешевело, что снова в наличии, где цена дошла до твоей цели. Защищённые магазины проверяются через встроенный браузер.</p></div>
+      <div class="feat reveal"><div class="k">Расчёт</div><h3>Стоимость под ключ</h3><p>Товар + комиссия оплаты + многоэтапная доставка (Nova Poshta вживую, Meest, форвардеры) + таможня €150. Итог в ₴ / $ / € / zł. Консолидация посылок.</p></div>
+      <div class="feat reveal"><div class="k">Аутфиты</div><h3>Конструктор образов</h3><p>Собери лук из сохранённых вещей на холсте, убери фон, посчитай итоговую стоимость комплекта и сохрани превью.</p></div>
+      <div class="feat reveal"><div class="k">Мои размеры</div><h3>Твой размер на виду</h3><p>Профиль по категориям (верх / низ / обувь / аксессуары). На карточках и в Сёрчере подходящие вещи помечаются значком «твой размер».</p></div>
+      <div class="feat reveal"><div class="k">Вишлист</div><h3>Сохраняй в один клик</h3><p>Плавающий тулбар на странице товара: «В вишлист», «Следить», «Чек прайс». С фото, брендом и ценой выбранного размера. Папки, заметки, целевая цена.</p></div>
+      <div class="feat reveal"><div class="k">Браузер</div><h3>Встроенные вкладки</h3><p>Полноценный браузер магазинов внутри окна — с реальной сессией, логином в свои кабинеты и переводом любой страницы на русский.</p></div>
+      <div class="feat reveal"><div class="k">Автозаполнение</div><h3>Чекаут без рутины</h3><p>Профиль доставки заполняет адрес на странице оформления одной кнопкой. Форму не отправляет и платёжные поля не трогает — только на доменах магазинов из каталога.</p></div>
+      <div class="feat reveal"><div class="k">Google-вход</div><h3>Сессия один раз</h3><p>Войди в Google один раз — кнопка «Google» в тулбаре авторизует на сайтах магазинов. Пароль вводишь только ты; приложение его не видит.</p></div>
+      <div class="feat reveal"><div class="k">Курс НБУ</div><h3>Живой курс гривны</h3><p>Официальный курс НБУ обновляется на лету — конвертация цен в USD / EUR / PLN / UAH без ручного ввода.</p></div>
+      <div class="feat reveal"><div class="k">Прокси · Адблок</div><h3>Доступ и чистота</h3><p>Свой прокси (ip:port:логин:пароль) открывает сайты, недоступные в Украине. Встроенный адблок прячет рекламу и баннеры куки одним тумблером.</p></div>
+      <div class="feat reveal"><div class="k">Форвардеры</div><h3>Доставка в Украину</h3><p>Справочник сервисов пересылки с зарубежных складов: Nova Poshta Global, Meest Shopping и др. — со складами и пометками.</p></div>
+      <div class="feat reveal"><div class="k">Приватность</div><h3>Локально и офлайн</h3><p>Всё в локальной базе на твоём ПК, без сервера и аккаунта. Бэкап в JSON в один клик. Обновления прилетают сами — подписанные.</p></div>
     </div>
   </div>
 </section>
 
-
-<section id="showcase">
+<section id="searcher">
   <div class="wrap">
-    <div class="sec-head reveal"><span class="num">02</span><h2 class="quote">Вблизи</h2></div>
-
-    <!-- 1. Order calculator -->
+    <div class="sec-head reveal"><span class="num">02</span><h2 class="quote">Сёрчер</h2></div>
     <div class="show reveal">
       <div class="sw-ui">
         <div class="sw-haz"></div>
-        <div class="sw-head"><span class="sw-nhc">NHC</span><span class="sw-ttl">Расчёт заказа</span><span class="sw-new">+ Новый</span></div>
+        <div class="sw-head"><span class="sw-nhc">NHC</span><span class="sw-ttl">Сёрчер</span><span class="sw-new">76 магазинов</span></div>
+        <div class="sw-pad">
+          <div class="sw-field">maison margiela tabi <span style="color:var(--muted2)">⌕</span></div>
+          <div class="sw-chips"><span class="lit">Все магазины</span><span>под ключ ≤ 600€</span><span>мой размер</span><span class="lit">в наличии</span></div>
+          <div class="sw-mt"></div>
+          <div class="sw-lbl">Результаты<span class="a">от 540€ под ключ</span></div>
+          <div style="display:grid;gap:7px;margin-top:7px">
+            <div class="rrow best"><span class="rb">SSENSE</span><span class="rn">Tabi leather ankle boots</span><span class="rp">540€ <small>↓ выгоднее</small></span></div>
+            <div class="rrow"><span class="rb">END.</span><span class="rn">Tabi leather ankle boots</span><span class="rp">612€</span></div>
+            <div class="rrow"><span class="rb">Farfetch</span><span class="rn">Tabi leather ankle boots</span><span class="rp">668€</span></div>
+          </div>
+        </div>
+      </div>
+      <div class="panel">
+        <div class="k">Сёрчер</div>
+        <h3>Один запрос — все магазины</h3>
+        <p>Вводишь бренд и модель <span class="dsh">┅</span> приложение опрашивает магазины разом и сводит результаты в одну выдачу с ценой «под ключ», чтобы сравнивать яблоки с яблоками.</p>
+        <ul class="pros">
+          <li><b>Параметры до поиска:</b> где искать (все / избранное / в Украину), потолок «под ключ», размер, валюта, «в наличии».</li>
+          <li><b>Цена под ключ</b> сразу с доставкой и таможней — видно реальную итоговую стоимость.</li>
+          <li><b>«Выгоднее на X»</b> подсвечивает, где тот же товар дешевле.</li>
+          <li><b>Защищённые магазины</b> подтягиваются через встроенный браузер по кнопке.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="radar">
+  <div class="wrap">
+    <div class="sec-head reveal"><span class="num">03</span><h2 class="quote">Радар</h2></div>
+    <div class="show reveal">
+      <div class="panel">
+        <div class="k">Радар цен и наличия</div>
+        <h3>Видно, что произошло</h3>
+        <p>Открыл радар <span class="dsh">┅</span> видишь свои вещи. Жмёшь «Проверить товары» <span class="dsh">┅</span> и результат раскладывается по секциям: понятно сразу, без копания.</p>
+        <ul class="pros">
+          <li><b>Подешевело · снова в наличии · цель достигнута</b> — главные события вверху.</li>
+          <li><b>Целевая цена:</b> задаёшь порог — радар скажет, когда вещь до него дошла.</li>
+          <li><b>Защищённые магазины</b> (антибот) проверяются через встроенный браузер с твоей сессией — без обхода защит.</li>
+          <li><b>Честно про ошибки:</b> если проверить нельзя — пишет почему (нужен вход, магазин закрыт, антибот).</li>
+        </ul>
+      </div>
+      <div class="sw-ui">
+        <div class="sw-haz"></div>
+        <div class="sw-head"><span class="sw-nhc">NHC</span><span class="sw-ttl">Радар</span><span class="sw-new acc">Проверить товары</span></div>
+        <div class="sw-pad" style="display:grid;gap:13px">
+          <div>
+            <div class="rsec ok">[02] ↓ Подешевело</div>
+            <div style="display:grid;gap:7px">
+              <div class="rrow"><span class="rb">MCQUEEN</span><span class="rn">Полусапоги</span><span class="rp"><span class="up">279€ ↓32%</span></span></div>
+              <div class="rrow"><span class="rb">Liu Jo</span><span class="rn">Брюки</span><span class="rp"><span class="up">33€ ↓18%</span></span></div>
+            </div>
+          </div>
+          <div>
+            <div class="rsec warn">[01] Не удалось проверить</div>
+            <div class="rblock">Магазин блокирует автопроверку (Akamai/Cloudflare). Мы не маскируем браузер — открой страницу вручную.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="calc">
+  <div class="wrap">
+    <div class="sec-head reveal"><span class="num">04</span><h2 class="quote">Расчёт</h2></div>
+    <div class="show reveal">
+      <div class="sw-ui">
+        <div class="sw-haz"></div>
+        <div class="sw-head"><span class="sw-nhc">NHC</span><span class="sw-ttl">Расчёт заказа</span><span class="sw-new">под ключ</span></div>
         <div class="sw-pad">
           <div class="sw-g2">
             <div><div class="sw-lbl">Цена товара</div><div class="sw-field">450</div></div>
@@ -356,17 +509,21 @@
       <div class="panel">
         <div class="k">Расчёт заказа</div>
         <h3>Полная стоимость «под ключ»</h3>
-        <p>Вписываешь цену <span class="dsh">┅</span> приложение само собирает всю воронку: комиссию оплаты, многоэтапную доставку и таможню, и показывает финальную цену в любой валюте по курсу НБУ.</p>
+        <p>Вписываешь цену <span class="dsh">┅</span> приложение собирает всю воронку: комиссию оплаты, многоэтапную доставку и таможню, и показывает финальную цену в любой валюте по курсу НБУ.</p>
         <ul class="pros">
           <li><b>Многоэтапная доставка:</b> Nova Poshta вживую, Meest, Meest Express и форвардеры в одной цепочке.</li>
-          <li><b>Таможня €150</b> считается автоматически: 10% пошлины + 20% НДС с превышения.</li>
-          <li><b>Любая валюта:</b> итог сразу в ₴ / $ / € / zł по живому курсу.</li>
+          <li><b>Таможня €150</b> считается автоматически: пошлина + НДС с превышения (пороги редактируются).</li>
+          <li><b>Консолидация:</b> несколько вещей в одной посылке — таможня и доставка делятся пропорционально.</li>
           <li>Видишь реальную цену <b>до покупки</b> — ничего не забудешь.</li>
         </ul>
       </div>
     </div>
+  </div>
+</section>
 
-    <!-- 2. Floating toolbar + wishlist -->
+<section id="wishlist">
+  <div class="wrap">
+    <div class="sec-head reveal"><span class="num">05</span><h2 class="quote">Вишлист</h2></div>
     <div class="show reveal">
       <div class="panel">
         <div class="k">Тулбар вишлиста</div>
@@ -374,8 +531,9 @@
         <p>На странице товара в любом магазине всплывает плавающий тулбар <span class="dsh">┅</span> не нужно копировать ссылки и цены руками.</p>
         <ul class="pros">
           <li><b>В вишлист:</b> сохраняет фото, бренд и цену выбранного размера.</li>
-          <li><b>Следить:</b> кладёт вещь под наблюдение за ценой.</li>
-          <li><b>Чек прайс:</b> мгновенно показывает цену в ₴ / $ / € по курсу НБУ.</li>
+          <li><b>Следить:</b> кладёт вещь под наблюдение за ценой для радара.</li>
+          <li><b>Чек прайс:</b> мгновенно показывает цену в ₴ / $ / € по курсу НБУ + растаможку.</li>
+          <li><b>Размеры</b> подтягиваются с карточки, а твой размер помечается значком.</li>
         </ul>
       </div>
       <div class="sw-ui">
@@ -390,15 +548,14 @@
       </div>
     </div>
 
-    <!-- 3. Sidebar: rate / proxy / adblock -->
     <div class="show reveal">
       <div class="sw-ui">
         <div class="sw-side">
           <div class="sw-srow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.6 2.7 2.6 15.3 0 18M12 3c-2.6 2.7-2.6 15.3 0 18"/></svg>Прокси<span class="r">вкл</span></div>
           <div class="sw-srow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3 4 6v6c0 5 3.5 8 8 9 4.5-1 8-4 8-9V6l-8-3Z"/></svg>Адблок<span class="sw-tg"></span></div>
           <div class="sw-tick">
-            <div class="sw-tk-head"><span>Курс НБУ · 15.06</span><span class="rf">↻</span></div>
-            <div class="sw-tk-rates"><span>$&nbsp;44.81</span><span>€&nbsp;51.86</span><b>₴&nbsp;12.21</b></div>
+            <div class="sw-tk-head"><span>Курс НБУ · сегодня</span><span class="rf">↻</span></div>
+            <div class="sw-tk-rates"><span>$&nbsp;44.81</span><span>€&nbsp;51.86</span><b>zł&nbsp;12.21</b></div>
           </div>
           <div class="sw-cta">Расчёт заказа</div>
         </div>
@@ -406,9 +563,9 @@
       <div class="panel">
         <div class="k">Слева под рукой</div>
         <h3>Курс, прокси, адблок</h3>
-        <p>Боковая панель держит главное в одном месте, не отвлекая от покупок.</p>
+        <p>Боковая панель держит главное в одном месте, не отвлекая от покупок. А счётчики на «Радаре» и «Аутфитах» всегда показывают, сколько там вещей.</p>
         <ul class="pros">
-          <li><b>Живой курс НБУ:</b> $ / € / ₴ обновляются на лету, без ручного ввода.</li>
+          <li><b>Живой курс НБУ:</b> $ / € / zł / ₴ обновляются на лету.</li>
           <li><b>Прокси</b> (ip:port:логин:пароль): открывай сайты, недоступные в Украине.</li>
           <li><b>Адблок:</b> убирает рекламу и баннеры куки одним тумблером.</li>
         </ul>
@@ -417,17 +574,44 @@
   </div>
 </section>
 
+<section id="outfits">
+  <div class="wrap">
+    <div class="sec-head reveal"><span class="num">06</span><h2 class="quote">Аутфиты</h2></div>
+    <div class="show reveal">
+      <div class="sw-ui">
+        <div class="sw-haz"></div>
+        <div class="sw-head"><span class="sw-nhc">NHC</span><span class="sw-ttl">Конструктор аутфитов</span><span class="sw-new">3 вещи</span></div>
+        <div class="sw-canvas">
+          <div class="ob"><b>куртка</b></div>
+          <div class="ob"><b>брюки</b></div>
+          <div class="ob"><b>обувь</b></div>
+          <div class="sw-receipt"><div class="t">Комплект</div><div class="b">1&nbsp;240&nbsp;€</div></div>
+        </div>
+      </div>
+      <div class="panel">
+        <div class="k">Конструктор аутфитов</div>
+        <h3>Собери образ из сохранённого</h3>
+        <p>Перетащи вещи из вишлиста на холст, собери лук <span class="dsh">┅</span> и сразу увидь стоимость всего комплекта.</p>
+        <ul class="pros">
+          <li><b>Удаление фона</b> у фото вещей в высоком качестве.</li>
+          <li><b>Итог по комплекту</b> в выбранной валюте, можно «под ключ».</li>
+          <li><b>Экспорт превью</b> картинкой — показать клиенту или сохранить.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
 
 <section id="how">
   <div class="wrap">
-    <div class="sec-head reveal"><span class="num">03</span><h2 class="quote">Как пользоваться</h2></div>
+    <div class="sec-head reveal"><span class="num">07</span><h2 class="quote">Как пользоваться</h2></div>
     <div class="steps">
       <div class="step reveal"><div class="n"><span class="nf">1</span><span class="nb">#</span></div><div><h3>Установи приложение</h3><p>Скачай <span class="pill">NEEDHYCLO-Setup.exe</span> и запусти <span class="dsh">┅</span> установщик в нашем стиле поставит программу и сам её откроет. Ярлык появится на рабочем столе.</p></div></div>
-      <div class="step reveal"><div class="n"><span class="nf">2</span><span class="nb">#</span></div><div><h3>Открой магазин из каталога</h3><p>На вкладке «Каталог» выбери магазин <span class="dsh">┅</span> он откроется во встроенном браузере. Кнопкой «Перевести на RU» можно перевести страницу.</p></div></div>
-      <div class="step reveal"><div class="n"><span class="nf">3</span><span class="nb">#</span></div><div><h3>Сохрани вещь</h3><p>На странице товара выбери размер и жми на плавающем тулбаре «В вишлист» или «Следить». «Чек прайс» покажет цену в USD/EUR/PLN/UAH по курсу НБУ.</p></div></div>
-      <div class="step reveal"><div class="n"><span class="nf">4</span><span class="nb">#</span></div><div><h3>Посчитай заказ под ключ</h3><p>Кнопка «Расчёт заказа» слева: впиши цену, добавь этапы доставки (Nova Poshta, Meest, форвардер) и получи полную стоимость с таможней в нужной валюте.</p></div></div>
-      <div class="step reveal"><div class="n"><span class="nf">5</span><span class="nb">#</span></div><div><h3>Прокси и адблок <span class="dsh">┅</span> если нужно</h3><p>Слева над курсом НБУ: вставь прокси, если сайт недоступен в Украине, и включи адблок, чтобы убрать рекламу и баннеры куки.</p></div></div>
-      <div class="step reveal"><div class="n"><span class="nf">6</span><span class="nb">#</span></div><div><h3>Обновляйся в один клик</h3><p>Когда выйдет новая версия, при запуске появится уведомление в углу <span class="dsh">┅</span> жми «Обновить». Если обновлений нет, программа просто открывается.</p></div></div>
+      <div class="step reveal"><div class="n"><span class="nf">2</span><span class="nb">#</span></div><div><h3>Найди вещь</h3><p>Открой магазин из «Каталога» или вбей бренд с моделью в «Сёрчер» <span class="dsh">┅</span> и сравни цены «под ключ» сразу по всем магазинам.</p></div></div>
+      <div class="step reveal"><div class="n"><span class="nf">3</span><span class="nb">#</span></div><div><h3>Сохрани и задай цель</h3><p>На странице товара выбери размер и жми «В вишлист» или «Следить». Поставь целевую цену <span class="dsh">┅</span> радар сообщит, когда вещь до неё дойдёт.</p></div></div>
+      <div class="step reveal"><div class="n"><span class="nf">4</span><span class="nb">#</span></div><div><h3>Прогоняй радар</h3><p>На «Радаре» жми «Проверить товары» <span class="dsh">┅</span> увидишь, что подешевело, что снова в наличии и где цель достигнута, по понятным секциям.</p></div></div>
+      <div class="step reveal"><div class="n"><span class="nf">5</span><span class="nb">#</span></div><div><h3>Посчитай заказ под ключ</h3><p>Кнопка «Расчёт заказа» слева: впиши цену, добавь этапы доставки (Nova Poshta, Meest, форвардер) и получи полную стоимость с таможней в нужной валюте.</p></div></div>
+      <div class="step reveal"><div class="n"><span class="nf">6</span><span class="nb">#</span></div><div><h3>Собери аутфит и оформи</h3><p>Собери лук в «Аутфитах», а на чекауте нажми «Доставка» — адрес заполнится сам (карту приложение не трогает).</p></div></div>
     </div>
     <div class="cta reveal" style="justify-content:flex-start;margin-top:36px">
       <a class="btn btn-accent" href="https://github.com/44orb/needhyclo-releases/releases/latest/download/NEEDHYCLO-Setup.exe">
@@ -447,16 +631,30 @@
 </footer>
 
 <script>
+  /* scroll reveal */
   (function(){
     var io = new IntersectionObserver(function(entries){
       entries.forEach(function(e){ if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); } });
     }, { threshold: 0.12, rootMargin: "0px 0px -8% 0px" });
-    document.querySelectorAll('.reveal').forEach(function(el, i){
-      // stagger items inside the same group for a cascade
+    document.querySelectorAll('.reveal').forEach(function(el){
       var sib = Array.prototype.indexOf.call(el.parentNode.children, el);
       el.style.transitionDelay = ((sib % 8) * 70) + 'ms';
       io.observe(el);
     });
+  })();
+</script>
+<script>
+  /* left rail scroll-spy — highlights the section you're currently on */
+  (function(){
+    var links = {};
+    document.querySelectorAll('.spy a').forEach(function(a){ links[a.getAttribute('href').slice(1)] = a; });
+    function setActive(id){
+      for(var k in links){ links[k].classList.toggle('active', k === id); }
+    }
+    var spyIO = new IntersectionObserver(function(entries){
+      entries.forEach(function(e){ if(e.isIntersecting) setActive(e.target.id); });
+    }, { rootMargin: "-45% 0px -50% 0px", threshold: 0 });
+    document.querySelectorAll('section[id]').forEach(function(s){ spyIO.observe(s); });
   })();
 </script>
 <script>
@@ -473,7 +671,6 @@
     if(/Safari\//.test(ua))     return 'Safari';
     return 'браузере';
   }
-  /* download glyph that mimics the browser toolbar icon (arrow into tray) */
   var ICON='<svg class="di" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" '+
     'stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">'+
     '<path d="M12 3v11"/><path d="m8 11 4 4 4-4"/><path d="M4 17v2a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-2"/></svg>';
@@ -483,7 +680,7 @@
     veil.className='dl-veil';
     veil.addEventListener('click', hide);
     var msg = mobile
-      ? 'Файл качается. Найди его в загрузках или шторке уведомлений <b style="color:var(--accent)">'+bn+'</b> и запусти.'
+      ? 'Файл качается. Найди его в загрузках или шторке уведомлений <b style="color:var(--accent)">'+bn+'</b> и запусти. Установка — на Windows-ПК.'
       : 'Файл качается. Открой его из загрузок <b style="color:var(--accent)">'+bn+'</b> — иконка '+ICON+' вверху справа, затем запусти установщик.';
     note=document.createElement('div');
     note.className='dl-note';
